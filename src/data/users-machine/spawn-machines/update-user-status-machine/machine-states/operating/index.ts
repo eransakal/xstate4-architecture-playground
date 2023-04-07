@@ -1,5 +1,5 @@
 import { actions } from 'xstate';
-import { UsersMachineEventsTypes } from '../../../users-machine/types';
+import { UsersMachineEventsTypes } from '../../../../types';
 import { UpdateUserStatusMachineStateConfig } from '../../types';
 
 export const operatingState: UpdateUserStatusMachineStateConfig = {

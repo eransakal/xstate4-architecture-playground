@@ -1,4 +1,4 @@
-import { UpdateUserStatusFailureEvent } from '../../users-machine/types';
+import { UpdateUserStatusFailureEvent } from '../../../types';
 
 type ParentEvents = UpdateUserStatusFailureEvent;
 

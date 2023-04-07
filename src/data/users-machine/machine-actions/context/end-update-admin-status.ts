@@ -1,7 +1,4 @@
 import { assign } from '@xstate/immer';
-import { actions, createMachine, spawn } from 'xstate';
-import { createUpdateUserStatusMachine } from '../../../update-user-status-machine/create-update-user-status-machine';
-import { createUsersMachineLogger } from '../../logger';
 import {
   UsersMachineContext,
   UsersMachineEvents,
