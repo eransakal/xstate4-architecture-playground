@@ -1,0 +1,25 @@
+import { actions } from 'xstate';
+import { createPollsMachineLogger } from '../../logger';
+import {
+  PollsMachineContext,
+  PollsMachineEvents,
+  PollsMachineEventsTypes,
+} from '../../types';
+
+const logger = createPollsMachineLogger('updateExternalInfo');
+
+export const updateExternalInfo = actions.assign(
+  (context: PollsMachineContext, event: PollsMachineEvents) => {
+    if (event.type !== PollsMachineEventsTypes.ExternalInfoUpdated) {
+      return context;
+    }
+
+    return {
+      ...context,
+      externalInfo: {
+        ...context.externalInfo,
+        ...event.externalInfo,
+      },
+    };
+  }
+);
