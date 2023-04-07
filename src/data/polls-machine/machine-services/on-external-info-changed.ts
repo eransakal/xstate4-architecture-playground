@@ -23,6 +23,7 @@ export const onExternalInfoChanged =
 
     onOwnUserChangedEvent.on(
       handleOwnUserChanged,
+      true,
       context.__mockServerInfo__.appInstance
     );
     return () => {

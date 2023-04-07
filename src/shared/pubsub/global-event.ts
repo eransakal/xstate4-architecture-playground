@@ -24,18 +24,30 @@ interface Listener<T> {
 export class GlobalEvent<T = undefined> {
   /** All the current listeners for this event. */
   private listeners: Array<Listener<T>> = [];
-
+  private lastEmittedValue: T | null = null;
+  private lastEmittedValueByApp: Record<string, T> = {};
   /**
    * Attaches a listener to trigger on all emits for this event.
    *
    * @param callback - The callback to invoke on all emits.
    */
-  public on(callback: (data: T) => void, appId?: string): void {
+
+  public on(
+    callback: (data: T) => void,
+    emitLastValue: boolean,
+    appId?: string
+  ): void {
     this.listeners.push({
       once: false,
       appId,
       callback,
     });
+
+    if (appId && emitLastValue && this.lastEmittedValueByApp[appId]) {
+      callback(this.lastEmittedValueByApp[appId]);
+    } else if (emitLastValue && this.lastEmittedValue) {
+      callback(this.lastEmittedValue);
+    }
   }
 
   /**
@@ -140,6 +152,7 @@ export class GlobalEvent<T = undefined> {
     : (emitting: T) => boolean = ((
     emitting?: T
   ) /* undefined only valid for singals */ => {
+    this.lastEmittedValue = emitting as T;
     const hadListeners = this.listeners.length > 0;
     for (const listener of this.listeners) {
       listener.callback(emitting as T);
@@ -167,6 +180,7 @@ export class GlobalEvent<T = undefined> {
     appId: string,
     emitting?: T
   ) /* undefined only valid for singals */ => {
+    this.lastEmittedValueByApp[appId] = emitting as T;
     const hadListeners = this.listeners.length > 0;
     for (const listener of this.listeners) {
       if (listener.appId === appId) {

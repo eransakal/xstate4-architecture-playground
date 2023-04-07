@@ -1,6 +1,6 @@
 {
-  "name": "xstate-quick-polls",
-  "version": "0.1.0",
+  "name": "xstate4-architecture-showcase",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^2.0.17",

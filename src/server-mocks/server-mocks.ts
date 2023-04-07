@@ -123,7 +123,7 @@ export const serverMocks = {
 
     const userWS = (globalMockWS[userId] =
       globalMockWS[userId] || new GlobalEvent<MockWebsocketPayload>());
-    userWS.on(callback);
+    userWS.on(callback, false);
   },
   unresgisterWS: (
     appInstance: string,

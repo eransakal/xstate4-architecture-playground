@@ -123,6 +123,18 @@ export const AppHeader: React.FC = () => {
           </>
 
           <>
+            <MenuGroup title="Network ">
+              <MenuItem isDisabled={true}>
+                Simulate deferred provider mounting dependency
+              </MenuItem>
+              <MenuItem isDisabled={true}>
+                Simulate slow network connectivity
+              </MenuItem>
+            </MenuGroup>
+            <MenuDivider />
+          </>
+
+          <>
             <MenuGroup title="Simulate Problems">
               <MenuItem isDisabled={true}>
                 Fail loading application users
