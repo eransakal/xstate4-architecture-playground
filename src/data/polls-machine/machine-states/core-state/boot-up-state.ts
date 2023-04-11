@@ -10,6 +10,9 @@ export const bootUpState: PollsMachineStateConfig = {
       invoke: [
         {
           src: 'onExternalInfoChanged',
+          data: {
+            emitLastValue: true,
+          },
         },
       ],
       on: {

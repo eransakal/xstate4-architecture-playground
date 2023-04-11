@@ -43,12 +43,13 @@ export const PollVotesView: React.FC<{}> = () => {
 
   const { votedTotal, items } = useMemo(() => {
     const totalVotes = pollVotes?.length ?? 0;
-    const votedTotal = pollVotes?.filter((vote) => {
-      return (
-        vote.userId === ownUser?.id ||
-        users?.find((user) => vote.userId === user.id)
-      );
-    }).length;
+    const votedTotal =
+      pollVotes?.filter((vote) => {
+        return (
+          vote.userId === ownUser?.id ||
+          users?.find((user) => vote.userId === user.id)
+        );
+      }).length ?? 0;
 
     const items =
       pollMetadata?.answers.map((answer) => {

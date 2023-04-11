@@ -1,1 +1,1 @@
-export * from './request-update-admin-status';
+export * from './update-admin-status';

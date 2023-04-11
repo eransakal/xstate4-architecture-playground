@@ -10,7 +10,7 @@ import {
 const logger = createPollsMachineLogger('onExternalInfoChanged');
 
 export const onExternalInfoChanged =
-  (context: PollsMachineContext) => (send: PollsMachineSender) => {
+  (context: PollsMachineContext, data: any) => (send: PollsMachineSender) => {
     const handleOwnUserChanged = (ownUser: User) => {
       send({
         type: PollsMachineEventsTypes.ExternalInfoUpdated,
@@ -23,7 +23,7 @@ export const onExternalInfoChanged =
 
     onOwnUserChangedEvent.on(
       handleOwnUserChanged,
-      true,
+      data.emitLastValue ?? false,
       context.__mockServerInfo__.appInstance
     );
     return () => {

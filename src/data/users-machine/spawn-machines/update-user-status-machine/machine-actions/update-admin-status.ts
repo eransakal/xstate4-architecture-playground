@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { UpdateUserStatusMachineContext } from '../types';
 
-export const requestUpdateAdminStatus = (
-  context: UpdateUserStatusMachineContext
-) => {
+export const updateAdminStatus = (context: UpdateUserStatusMachineContext) => {
   axios.post(
     '/users/setAdmin',
     {
