@@ -44,7 +44,7 @@ export const App: React.FC<{
         appInstance ===
         (localStorage.getItem('sakalim-xstate-inspect') || 'app-instance-1'),
     };
-  }, []);
+  }, [appInstance]);
 
   return (
     <AppContext.Provider value={providerValue}>

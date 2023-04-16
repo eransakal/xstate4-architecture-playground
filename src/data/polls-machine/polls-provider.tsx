@@ -2,7 +2,6 @@ import React, {
   useState,
   useMemo,
   PropsWithChildren,
-  useEffect,
   useContext,
 } from 'react';
 import { PollsMachine, PollsMachineService } from './types';

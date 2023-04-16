@@ -1,4 +1,4 @@
-import { actions, createMachine } from 'xstate';
+import { createMachine } from 'xstate';
 import { updateAdminStatus } from './machine-actions';
 import { operatingState } from './machine-states/operating';
 import {

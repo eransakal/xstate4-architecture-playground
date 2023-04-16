@@ -1,10 +1,6 @@
 import { assign } from '@xstate/immer';
 import { createUsersMachineLogger } from '../../logger';
-import {
-  UsersMachineContext,
-  UsersMachineEvents,
-  UsersMachineEventsTypes,
-} from '../../types';
+import { UsersMachineContext, UsersMachineEvents } from '../../types';
 
 const logger = createUsersMachineLogger('Update Users Information');
 

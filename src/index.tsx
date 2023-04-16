@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { Box, ChakraProvider, Container, Flex, Grid } from '@chakra-ui/react';
+import { ChakraProvider, Container, Flex, Grid } from '@chakra-ui/react';
 import { App } from './app';
 import { serverMocks } from './server-mocks/server-mocks';
 import { inspect } from '@xstate/inspect';

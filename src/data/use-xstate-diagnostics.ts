@@ -26,5 +26,5 @@ useEffect(() => {
     return () => {
       unsubscribe();
     };
-  }, [service]);
+  }, [service, logger]);
 };

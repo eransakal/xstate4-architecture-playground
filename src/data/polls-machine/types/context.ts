@@ -1,4 +1,3 @@
-import { UserAvatar } from '../../../components/users/user-avatar';
 
 export interface PollsMachineContext {
   __mockServerInfo__: {

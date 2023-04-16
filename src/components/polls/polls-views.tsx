@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { CreatePollsView } from './create-polls-view';
 import { PollVotesView } from './poll-votes-view';
 import { Box } from '@chakra-ui/react';

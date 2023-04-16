@@ -1,5 +1,3 @@
-import { getPollType } from '../../data/polls-machine/machine-selectors';
-
 export interface PollMetadata {
   type: string;
   answers: { id: string; icon: string; label: string }[];

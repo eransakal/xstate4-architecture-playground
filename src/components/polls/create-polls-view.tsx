@@ -8,13 +8,12 @@ import {
   VStack,
   Heading,
 } from '@chakra-ui/react';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Select, { components, ControlProps } from 'react-select';
 import { usePollsService } from '../../data/polls-machine/use-polls-service';
 import { PollIcon } from './poll-icon';
 import { pollsMetadata } from './polls-metadata';
 import { useSelector } from '@xstate/react';
-import { UsersContext } from '../../data/users-machine/users-provider';
 import { getIsStartPollInProgress } from '../../data/polls-machine/machine-selectors';
 
 const Control = ({ children, ...props }: ControlProps<any, false>) => {

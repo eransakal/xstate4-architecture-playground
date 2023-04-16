@@ -6,7 +6,6 @@ import {
   Box,
   HStack,
   AvatarGroup,
-  Tooltip,
 } from '@chakra-ui/react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { usePollsService } from '../../data/polls-machine/use-polls-service';
@@ -73,7 +72,7 @@ export const PollVotesView: React.FC<{}> = () => {
       items,
       votedTotal,
     };
-  }, [pollMetadata?.answers, users, pollVotes]);
+  }, [pollMetadata?.answers, users, pollVotes, ownUser?.id]);
 
   useEffect(() => {
     setPollMetadata(

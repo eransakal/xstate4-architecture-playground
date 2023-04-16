@@ -1,13 +1,12 @@
 import { onOwnUserChangedEvent } from '../../users-machine/global-events';
 import { User } from '../../users-machine/types';
-import { createPollsMachineLogger } from '../logger';
 import {
   PollsMachineContext,
   PollsMachineEventsTypes,
   PollsMachineSender,
 } from '../types';
 
-const logger = createPollsMachineLogger('onExternalInfoChanged');
+// const logger = createPollsMachineLogger('onExternalInfoChanged');
 
 export const onExternalInfoChanged =
   (context: PollsMachineContext, data: any) => (send: PollsMachineSender) => {

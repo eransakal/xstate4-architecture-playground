@@ -1,12 +1,11 @@
 import { assign } from '@xstate/immer';
-import { createUsersMachineLogger } from '../../logger';
 import {
   UsersMachineContext,
   UsersMachineEvents,
   UsersMachineEventsTypes,
 } from '../../types';
 
-const logger = createUsersMachineLogger('updateAdminStatus');
+// const logger = createUsersMachineLogger('updateAdminStatus');
 
 export const updateAdminStatus = assign(
   (context: UsersMachineContext, event: UsersMachineEvents) => {

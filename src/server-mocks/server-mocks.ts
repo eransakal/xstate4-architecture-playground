@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { User } from '../data/users-machine/types';
 import { GlobalEvent } from '../shared/pubsub/global-event';
 
-var mock = new MockAdapter(axios, { delayResponse: 2000 });
+const mock = new MockAdapter(axios, { delayResponse: 2000 });
 
 const usersData = [
   {
@@ -138,7 +138,7 @@ export const serverMocks = {
   setup: () => {
     mock.onGet('/users').reply((config) => {
       let ownUser = null;
-      let users: any[] = [];
+      const users: any[] = [];
 
       const userOrFailure = getRequestUserFromHeader(config, false);
 

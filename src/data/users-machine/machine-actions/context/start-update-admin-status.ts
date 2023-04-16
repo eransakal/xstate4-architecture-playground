@@ -1,6 +1,5 @@
 import { assign } from '@xstate/immer';
-import { actions, createMachine, spawn } from 'xstate';
-import { createUsersMachineLogger } from '../../logger';
+import { spawn } from 'xstate';
 import { createUpdateUserStatusMachine } from '../../spawn-machines/update-user-status-machine/create-update-user-status-machine';
 import {
   UsersMachineContext,
@@ -8,7 +7,7 @@ import {
   UsersMachineEventsTypes,
 } from '../../types';
 
-const logger = createUsersMachineLogger('updateUserAdminStatus');
+// const logger = createUsersMachineLogger('updateUserAdminStatus');
 
 export const startUpdateAdminStatus = assign(
   (context: UsersMachineContext, event: UsersMachineEvents) => {

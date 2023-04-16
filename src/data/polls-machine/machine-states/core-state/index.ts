@@ -1,4 +1,4 @@
-import { PollsMachineEventsTypes, PollsMachineStateConfig } from '../../types';
+import { PollsMachineStateConfig } from '../../types';
 import { bootUpState } from './boot-up-state';
 import { operatingState } from './operating-state';
 

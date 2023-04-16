@@ -1,7 +1,6 @@
-import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
   Button,
-  IconButton,
   Link,
   Menu,
   MenuButton,
@@ -14,17 +13,16 @@ import {
   Modal,
   ModalBody,
   ModalCloseButton,
+  GridItem,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import React, { useContext } from 'react';
-import { Grid, GridItem } from '@chakra-ui/react';
-import { AppContext } from './app';
+import React from 'react';
+import { Grid } from '@chakra-ui/react';
 
 export const AppHeader: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure({});

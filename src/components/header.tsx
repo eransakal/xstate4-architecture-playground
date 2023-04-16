@@ -8,15 +8,13 @@ import {
   MenuItemOption,
   Menu,
   MenuButton,
-  Avatar,
   Text,
   IconButton,
   Badge,
   Box,
   Flex,
   Button,
-  HStack,
-  Stack,
+  HStack
 } from '@chakra-ui/react';
 import { useSelector } from '@xstate/react';
 import { getOwnUser } from '../data/users-machine/machine-selectors';

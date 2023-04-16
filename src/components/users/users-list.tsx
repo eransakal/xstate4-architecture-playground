@@ -2,7 +2,6 @@ import {
   CircularProgress,
   Switch,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,

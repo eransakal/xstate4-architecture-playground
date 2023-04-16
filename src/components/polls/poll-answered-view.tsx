@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Center, HStack } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
 import React from 'react';
 import { Text } from '@chakra-ui/react';
 
