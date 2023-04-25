@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { usePollsService } from '../../data/polls-machine/use-polls-service';
 import { PollIcon } from './poll-icon';
 import { pollsMetadata, PollMetadata } from './polls-metadata';
-import { useSelector } from '@xstate/react';
+import { usePollsUpdates } from '../../data/polls-machine';
 import {
   getIsAnswerPollInProgress,
   getPollType,
@@ -11,9 +11,11 @@ import {
 
 export const SelectAnswerView: React.FC<{}> = () => {
   const [pollMetadata, setPollMetadata] = useState<PollMetadata | null>(null);
-  const { actions, pollsMachineService } = usePollsService();
-  const pollType = useSelector(pollsMachineService, getPollType);
-  const isBusy = useSelector(pollsMachineService, getIsAnswerPollInProgress);
+  const { actions } = usePollsService();
+  const { pollType, isBusy } = usePollsUpdates({
+    pollType: getPollType,
+    isBusy: getIsAnswerPollInProgress,
+  });
 
   useEffect(() => {
     if (pollType) {

@@ -13,7 +13,7 @@ import Select, { components, ControlProps } from 'react-select';
 import { usePollsService } from '../../data/polls-machine/use-polls-service';
 import { PollIcon } from './poll-icon';
 import { pollsMetadata } from './polls-metadata';
-import { useSelector } from '@xstate/react';
+import { usePollsUpdates } from '../../data/polls-machine';
 import { getIsStartPollInProgress } from '../../data/polls-machine/machine-selectors';
 
 const Control = ({ children, ...props }: ControlProps<any, false>) => {
@@ -49,9 +49,9 @@ const Option = ({
   ) : null;
 
 export const CreatePollsView: React.FC<{}> = () => {
-  const { actions, pollsMachineService } = usePollsService();
+  const { actions } = usePollsService();
 
-  const isBusy = useSelector(pollsMachineService, getIsStartPollInProgress);
+  const isBusy = usePollsUpdates(getIsStartPollInProgress);
   const [pollMetadata, setPollMetadata] = useState(pollsMetadata[0]);
   const [isPrivate, setIsPrivate] = useState(true);
 

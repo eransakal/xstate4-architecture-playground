@@ -19,26 +19,29 @@ import {
   getPollVotes,
 } from '../../data/polls-machine/machine-selectors';
 import { UserAvatar } from '../users/user-avatar';
-import { useUsersService } from '../../data/users-machine/use-users-service';
 import {
   getOwnUser,
   getUsers,
+  getIsAdmin,
 } from '../../data/users-machine/machine-selectors';
-import { getIsAdmin } from '../../data/users-machine/machine-selectors/get-is-admin';
+import { useUsersUpdates } from '../../data/users-machine';
+import { usePollsUpdates } from '../../data/polls-machine';
 
 export const PollVotesView: React.FC<{}> = () => {
   const [pollMetadata, setPollMetadata] = useState<PollMetadata | null>(null);
 
-  const { actions, pollsMachineService } = usePollsService();
-  const { usersMachineService } = useUsersService();
-  const users = useSelector(usersMachineService, getUsers);
-  const ownUser = useSelector(usersMachineService, getOwnUser);
-  const isAdmin = useSelector(usersMachineService, getIsAdmin);
-  const pollType = useSelector(pollsMachineService, getPollType);
-  const pollIsPrivate = useSelector(pollsMachineService, getIsPollPrivate);
-  const pollVotes = useSelector(pollsMachineService, getPollVotes);
-
-  const isBusy = useSelector(pollsMachineService, getIsStopPollInProgress);
+  const { actions } = usePollsService();
+  const { ownUser, users, isAdmin } = useUsersUpdates({
+    ownUser: getOwnUser,
+    users: getUsers,
+    isAdmin: getIsAdmin,
+  });
+  const { pollType, pollIsPrivate, pollVotes, isBusy } = usePollsUpdates({
+    pollType: getPollType,
+    pollIsPrivate: getIsPollPrivate,
+    pollVotes: getPollVotes,
+    isBusy: getIsStopPollInProgress,
+  });
 
   const { votedTotal, items } = useMemo(() => {
     const totalVotes = pollVotes?.length ?? 0;

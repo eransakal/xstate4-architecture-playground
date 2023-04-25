@@ -14,22 +14,21 @@ import {
   Box,
   Flex,
   Button,
-  HStack
+  HStack,
 } from '@chakra-ui/react';
-import { useSelector } from '@xstate/react';
 import { getOwnUser } from '../data/users-machine/machine-selectors';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { UserAvatar } from './users/user-avatar';
 import { useUsersService } from '../data/users-machine/use-users-service';
 import { AppContext } from '../app';
+import { useUsersUpdates } from '../data/users-machine/use-users-updates';
 
 export const Header: React.FC<{}> = () => {
   const {
-    usersMachineService,
     actions: { showList },
   } = useUsersService();
   const { inspectEnabled } = useContext(AppContext);
-  const ownUser = useSelector(usersMachineService, getOwnUser);
+  const ownUser = useUsersUpdates(getOwnUser);
 
   return (
     ownUser && (

@@ -10,7 +10,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import { useSelector } from '@xstate/react';
+import { useUsersUpdates } from '../../data/users-machine';
 import React from 'react';
 import { getUsers } from '../../data/users-machine/machine-selectors';
 import { useUsersService } from '../../data/users-machine/use-users-service';
@@ -18,10 +18,9 @@ import { UserAvatar } from './user-avatar';
 
 export const UsersList: React.FC = () => {
   const {
-    usersMachineService,
     actions: { updateUserRole },
   } = useUsersService();
-  const users = useSelector(usersMachineService, getUsers);
+  const users = useUsersUpdates(getUsers);
 
   return (
     <TableContainer>
