@@ -7,7 +7,7 @@ import { setUsers } from './machine-actions/context/set-users';
 import { getUsers } from './machine-services/get-users';
 import { useXStateDiagnostics } from '../use-xstate-diagnostics';
 import { emitUserRoleUpdated } from './machine-actions/emit-user-role-updated';
-import { onUserRoleChanged } from './machine-services/on-user-admin-status-changed';
+import { onUserRoleChanged } from './machine-services/on-user-role-changed';
 import { isWSEventOfOwnUser } from './machine-guards';
 import { updateUserRole } from './machine-actions/context/update-user-role';
 import { spawnUpdateUserRole } from './machine-actions/context/spawn-update-user-role';
