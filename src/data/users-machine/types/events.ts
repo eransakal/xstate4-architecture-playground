@@ -1,9 +1,9 @@
 import { User } from './context';
 
 export enum UsersMachineEventsTypes {
-  UserStatusUpdated = 'UserStatusUpdated',
-  UpdateUserStatusFailure = 'UpdateUserStatusFailure',
-  UpdateUserStatus = 'UpdatingUserStatus',
+  UserRoleUpdated = 'UserRoleUpdated',
+  UpdateUserRoleFailure = 'UpdateUserRoleFailure',
+  UpdateUserRole = 'UpdatingUserRole',
   HideList = 'HideList',
   ShowList = 'ShowList',
 }
@@ -16,27 +16,27 @@ type invokeEvents = {
   };
 };
 
-export type UpdateUserStatusFailureEvent = {
-  type: UsersMachineEventsTypes.UpdateUserStatusFailure;
+export type UpdateUserRoleFailureEvent = {
+  type: UsersMachineEventsTypes.UpdateUserRoleFailure;
   userId: number;
 };
 
 export type UsersMachineEvents =
   | invokeEvents
   | {
-      type: UsersMachineEventsTypes.UserStatusUpdated;
+      type: UsersMachineEventsTypes.UserRoleUpdated;
       userId: number;
       isAdmin: boolean;
     }
   | {
-      type: UsersMachineEventsTypes.UpdateUserStatus;
+      type: UsersMachineEventsTypes.UpdateUserRole;
       userId: number;
       isAdmin: boolean;
     }
   | {
       type: UsersMachineEventsTypes.HideList;
     }
-  | UpdateUserStatusFailureEvent
+  | UpdateUserRoleFailureEvent
   | {
       type: UsersMachineEventsTypes.ShowList;
     };

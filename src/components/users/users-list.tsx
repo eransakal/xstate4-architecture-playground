@@ -19,7 +19,7 @@ import { UserAvatar } from './user-avatar';
 export const UsersList: React.FC = () => {
   const {
     usersMachineService,
-    actions: { updateUserStatus },
+    actions: { updateUserRole },
   } = useUsersService();
   const users = useSelector(usersMachineService, getUsers);
 
@@ -51,7 +51,7 @@ export const UsersList: React.FC = () => {
                   <Switch
                     isChecked={user.isAdmin}
                     onChange={(e) =>
-                      updateUserStatus(user.id, e.currentTarget.checked)
+                      updateUserRole(user.id, e.currentTarget.checked)
                     }
                   />
                 )}

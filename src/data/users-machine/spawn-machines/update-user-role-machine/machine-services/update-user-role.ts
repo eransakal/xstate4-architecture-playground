@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { UpdateUserStatusMachineContext } from '../types';
+import { UpdateUserRoleMachineContext } from '../types';
 
-export const updateUserRole = (context: UpdateUserStatusMachineContext) => {
+export const updateUserRole = (context: UpdateUserRoleMachineContext) => {
   return axios.post(
     '/users/setAdmin',
     {

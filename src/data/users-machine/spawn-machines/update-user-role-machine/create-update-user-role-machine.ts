@@ -2,12 +2,12 @@ import { createMachine } from 'xstate';
 import { updateUserRole } from './machine-services';
 import { operatingState } from './machine-states/operating';
 import {
-  UpdateUserStatusMachineEvents,
-  UpdateUserStatusMachineContext,
-  UpdateUserStatusMachineId,
+  UpdateUserRoleMachineEvents,
+  UpdateUserRoleMachineContext,
+  UpdateUserRoleMachineId,
 } from './types';
 
-export const createUpdateUserStatusMachine = ({
+export const createUpdateUserRoleMachine = ({
   appInstance,
   userId,
   isAdmin,
@@ -17,11 +17,11 @@ export const createUpdateUserStatusMachine = ({
   appInstance: string;
 }) => {
   return createMachine<
-    UpdateUserStatusMachineContext,
-    UpdateUserStatusMachineEvents
+    UpdateUserRoleMachineContext,
+    UpdateUserRoleMachineEvents
   >(
     {
-      id: UpdateUserStatusMachineId,
+      id: UpdateUserRoleMachineId,
       context: {
         __mockServerInfo__: {
           appInstance,

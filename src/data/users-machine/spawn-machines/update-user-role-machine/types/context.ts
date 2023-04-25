@@ -1,4 +1,4 @@
-export interface UpdateUserStatusMachineContext {
+export interface UpdateUserRoleMachineContext {
   __mockServerInfo__: {
     appInstance: string;
   };

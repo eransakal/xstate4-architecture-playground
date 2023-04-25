@@ -5,16 +5,16 @@ import {
 
 export const operatingState: UsersMachineStateConfig = {
   on: {
-    [UsersMachineEventsTypes.UpdateUserStatus]: {
+    [UsersMachineEventsTypes.UpdateUserRole]: {
       cond: (context) => {
         return !!context.ownUser?.isAdmin;
       },
       actions: 'spawnUpdateUserRole',
     },
-    [UsersMachineEventsTypes.UpdateUserStatusFailure]: {
+    [UsersMachineEventsTypes.UpdateUserRoleFailure]: {
       actions: 'stopSpawnUpdateUserRole',
     },
-    [UsersMachineEventsTypes.UserStatusUpdated]: [
+    [UsersMachineEventsTypes.UserRoleUpdated]: [
       {
         cond: 'isWSEventOfOwnUser',
         actions: [

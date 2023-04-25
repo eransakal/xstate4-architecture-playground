@@ -1,6 +1,6 @@
 import { assign } from '@xstate/immer';
 import { spawn } from 'xstate';
-import { createUpdateUserStatusMachine } from '../../spawn-machines/update-user-status-machine/create-update-user-status-machine';
+import { createUpdateUserRoleMachine } from '../../spawn-machines/update-user-role-machine/create-update-user-role-machine';
 import {
   UsersMachineContext,
   UsersMachineEvents,
@@ -11,13 +11,13 @@ import {
 
 export const spawnUpdateUserRole = assign(
   (context: UsersMachineContext, event: UsersMachineEvents) => {
-    if (event.type !== UsersMachineEventsTypes.UpdateUserStatus) {
+    if (event.type !== UsersMachineEventsTypes.UpdateUserRole) {
       return;
     }
 
     if (context.ownUser?.id === event.userId) {
       context.ownUser.updateStatusRef = spawn(
-        createUpdateUserStatusMachine({
+        createUpdateUserRoleMachine({
           appInstance: context.__mockServerInfo__.appInstance,
           userId: event.userId,
           isAdmin: event.isAdmin,
@@ -27,7 +27,7 @@ export const spawnUpdateUserRole = assign(
       const user = context.users.find((user) => user.id === event.userId);
       if (user) {
         user.updateStatusRef = spawn(
-          createUpdateUserStatusMachine({
+          createUpdateUserRoleMachine({
             appInstance: context.__mockServerInfo__.appInstance,
             userId: event.userId,
             isAdmin: event.isAdmin,

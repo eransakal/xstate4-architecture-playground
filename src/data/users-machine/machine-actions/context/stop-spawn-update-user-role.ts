@@ -10,8 +10,8 @@ import {
 export const stopSpawnUpdateUserRole = assign(
   (context: UsersMachineContext, event: UsersMachineEvents) => {
     if (
-      event.type === UsersMachineEventsTypes.UserStatusUpdated ||
-      event.type === UsersMachineEventsTypes.UpdateUserStatusFailure
+      event.type === UsersMachineEventsTypes.UserRoleUpdated ||
+      event.type === UsersMachineEventsTypes.UpdateUserRoleFailure
     ) {
       if (context.ownUser?.id === event.userId) {
         context.ownUser.updateStatusRef?.stop();

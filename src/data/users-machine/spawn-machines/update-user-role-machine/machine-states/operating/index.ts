@@ -1,8 +1,8 @@
 import { actions } from 'xstate';
 import { UsersMachineEventsTypes } from '../../../../types';
-import { UpdateUserStatusMachineStateConfig } from '../../types';
+import { UpdateUserRoleMachineStateConfig } from '../../types';
 
-export const operatingState: UpdateUserStatusMachineStateConfig = {
+export const operatingState: UpdateUserRoleMachineStateConfig = {
   initial: 'inProgress',
   states: {
     inProgress: {
@@ -10,7 +10,7 @@ export const operatingState: UpdateUserStatusMachineStateConfig = {
       after: {
         5000: {
           actions: actions.sendParent((context) => ({
-            type: UsersMachineEventsTypes.UpdateUserStatusFailure,
+            type: UsersMachineEventsTypes.UpdateUserRoleFailure,
             userId: context.userId,
           })),
         },

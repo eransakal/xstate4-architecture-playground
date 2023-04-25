@@ -17,9 +17,9 @@ export const useUsersService = () => {
           type: UsersMachineEventsTypes.HideList,
         });
       },
-      updateUserStatus: (userId: number, isAdmin: boolean) => {
+      updateUserRole: (userId: number, isAdmin: boolean) => {
         usersMachineService.send({
-          type: UsersMachineEventsTypes.UpdateUserStatus,
+          type: UsersMachineEventsTypes.UpdateUserRole,
           userId,
           isAdmin,
         });

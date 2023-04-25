@@ -5,7 +5,7 @@ export const listState: UsersMachineStateConfig = {
   states: {
     visible: {
       on: {
-        [UsersMachineEventsTypes.UserStatusUpdated]: {
+        [UsersMachineEventsTypes.UserRoleUpdated]: {
           cond: (context, event) =>
             context.ownUser?.id === event.userId && !event.isAdmin,
           target: 'hidden',

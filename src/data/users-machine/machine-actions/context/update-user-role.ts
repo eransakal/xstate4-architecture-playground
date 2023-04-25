@@ -9,7 +9,7 @@ import {
 
 export const updateUserRole = assign(
   (context: UsersMachineContext, event: UsersMachineEvents) => {
-    if (event.type !== UsersMachineEventsTypes.UserStatusUpdated) {
+    if (event.type !== UsersMachineEventsTypes.UserRoleUpdated) {
       return;
     }
 

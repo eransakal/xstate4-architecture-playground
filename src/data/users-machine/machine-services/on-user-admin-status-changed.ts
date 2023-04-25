@@ -16,7 +16,7 @@ export const onUserRoleChanged =
         const isAdmin = payload.isAdmin;
 
         send({
-          type: UsersMachineEventsTypes.UserStatusUpdated,
+          type: UsersMachineEventsTypes.UserRoleUpdated,
           userId,
           isAdmin,
         });
