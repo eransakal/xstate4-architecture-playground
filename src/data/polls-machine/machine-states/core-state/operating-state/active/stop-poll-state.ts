@@ -11,7 +11,7 @@ export const stopPollState: PollsMachineStateConfig = {
       on: {
         [PollsMachineEventsTypes.EndPoll]: {
           target: 'inProgress',
-          actions: 'endPoll',
+          actions: 'requestEndPoll',
         },
       },
     },

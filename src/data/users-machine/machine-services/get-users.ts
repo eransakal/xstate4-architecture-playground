@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { UsersMachineContext } from '../types';
 
-export const getUsersInformation = async (context: UsersMachineContext) => {
+export const getUsers = async (context: UsersMachineContext) => {
   const result = await axios.get('/users', {
     headers: {
       'x-appInstanceId': context.__mockServerInfo__.appInstance,

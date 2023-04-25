@@ -1,1 +1,1 @@
-export {}
+export * from './update-user-role';

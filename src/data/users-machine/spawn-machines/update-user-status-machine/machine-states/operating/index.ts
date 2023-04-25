@@ -6,7 +6,7 @@ export const operatingState: UpdateUserStatusMachineStateConfig = {
   initial: 'inProgress',
   states: {
     inProgress: {
-      entry: 'updateAdminStatus',
+      invoke: { src: 'updateUserRole' },
       after: {
         5000: {
           actions: actions.sendParent((context) => ({

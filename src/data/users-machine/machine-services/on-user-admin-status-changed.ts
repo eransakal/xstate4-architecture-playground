@@ -8,7 +8,7 @@ import {
   UsersMachineSender,
 } from '../types';
 
-export const onUserAdminStatusChanged =
+export const onUserRoleChanged =
   (context: UsersMachineContext) => (send: UsersMachineSender) => {
     const handler = (payload: MockWebsocketPayload) => {
       if (payload.type === 'user-admin-status-changed') {

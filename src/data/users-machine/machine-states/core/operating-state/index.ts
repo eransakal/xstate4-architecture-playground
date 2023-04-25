@@ -9,27 +9,27 @@ export const operatingState: UsersMachineStateConfig = {
       cond: (context) => {
         return !!context.ownUser?.isAdmin;
       },
-      actions: 'startUpdateAdminStatus',
+      actions: 'spawnUpdateUserRole',
     },
     [UsersMachineEventsTypes.UpdateUserStatusFailure]: {
-      actions: 'endUpdateAdminStatus',
+      actions: 'stopSpawnUpdateUserRole',
     },
     [UsersMachineEventsTypes.UserStatusUpdated]: [
       {
-        cond: 'isEventOfOwnUser',
+        cond: 'isWSEventOfOwnUser',
         actions: [
-          'updateUserAdminStatus',
-          'endUpdateAdminStatus',
-          'emitIsAdminChanged',
+          'updateUserRole',
+          'stopSpawnUpdateUserRole',
+          'emitUserRoleUpdated',
         ],
       },
       {
-        actions: ['updateUserAdminStatus', 'endUpdateAdminStatus'],
+        actions: ['updateUserRole', 'stopSpawnUpdateUserRole'],
       },
     ],
   },
   initial: 'idle',
-  invoke: { src: 'onUserAdminStatusChanged' },
+  invoke: { src: 'onUserRoleChanged' },
   states: {
     idle: {},
   },

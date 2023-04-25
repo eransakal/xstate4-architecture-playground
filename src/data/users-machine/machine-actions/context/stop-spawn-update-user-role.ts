@@ -5,9 +5,9 @@ import {
   UsersMachineEventsTypes,
 } from '../../types';
 
-// const logger = createUsersMachineLogger('endUpdateAdminStatus');
+// const logger = createUsersMachineLogger('stopSpawnUpdateUserRole');
 
-export const endUpdateAdminStatus = assign(
+export const stopSpawnUpdateUserRole = assign(
   (context: UsersMachineContext, event: UsersMachineEvents) => {
     if (
       event.type === UsersMachineEventsTypes.UserStatusUpdated ||

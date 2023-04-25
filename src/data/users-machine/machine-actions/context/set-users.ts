@@ -4,7 +4,7 @@ import { UsersMachineContext, UsersMachineEvents } from '../../types';
 
 const logger = createUsersMachineLogger('Update Users Information');
 
-export const updateUsersInformation = assign(
+export const setUsers = assign(
   (context: UsersMachineContext, event: UsersMachineEvents) => {
     if (event.type !== 'done.invoke.users.core.bootUp:invocation[0]') {
       return undefined;

@@ -3,15 +3,15 @@ import { UsersMachine, UsersMachineService } from './types';
 import { createUsersMachine } from './create-users-machine';
 import { useMachine } from '@xstate/react';
 import { createUsersMachineLogger } from './logger';
-import { updateUsersInformation } from './machine-actions/context/update-users-information';
-import { getUsersInformation } from './machine-services/get-users-information';
+import { setUsers } from './machine-actions/context/set-users';
+import { getUsers } from './machine-services/get-users';
 import { useXStateDiagnostics } from '../use-xstate-diagnostics';
-import { emitIsAdminChanged } from './machine-actions/emit-is-admin-changed';
-import { onUserAdminStatusChanged } from './machine-services/on-user-admin-status-changed';
-import { isEventOfOwnUser } from './machine-guards';
-import { updateAdminStatus } from './machine-actions/context/update-admin-status';
-import { startUpdateAdminStatus } from './machine-actions/context/start-update-admin-status';
-import { endUpdateAdminStatus } from './machine-actions/context/end-update-admin-status';
+import { emitUserRoleUpdated } from './machine-actions/emit-user-role-updated';
+import { onUserRoleChanged } from './machine-services/on-user-admin-status-changed';
+import { isWSEventOfOwnUser } from './machine-guards';
+import { updateUserRole } from './machine-actions/context/update-user-role';
+import { spawnUpdateUserRole } from './machine-actions/context/spawn-update-user-role';
+import { stopSpawnUpdateUserRole } from './machine-actions/context/stop-spawn-update-user-role';
 import { AppContext } from '../../app';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,18 +28,18 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [, , machineService] = useMachine<UsersMachine>(machine, {
     devTools: inspectEnabled,
     actions: {
-      startUpdateAdminStatus,
-      emitIsAdminChanged,
-      endUpdateAdminStatus,
-      updateUsersInformation,
-      updateUserAdminStatus: updateAdminStatus,
+      spawnUpdateUserRole,
+      emitUserRoleUpdated,
+      stopSpawnUpdateUserRole,
+      setUsers,
+      updateUserRole,
     },
     services: {
-      getUsersInformation,
-      onUserAdminStatusChanged,
+      getUsers,
+      onUserRoleChanged,
     },
     guards: {
-      isEventOfOwnUser,
+      isWSEventOfOwnUser,
     },
   });
 

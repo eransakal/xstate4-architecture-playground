@@ -9,12 +9,14 @@ export const startPollState: PollsMachineStateConfig = {
     idle: {
       on: {
         [PollsMachineEventsTypes.CreateAPoll]: {
-          actions: 'startAPoll',
           target: 'inProgress',
         },
       },
     },
     inProgress: {
+      invoke: {
+        src: 'startAPoll',
+      },
       after: {
         5000: {
           target: 'idle',

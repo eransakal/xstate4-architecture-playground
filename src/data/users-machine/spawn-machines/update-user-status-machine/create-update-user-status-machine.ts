@@ -1,5 +1,5 @@
 import { createMachine } from 'xstate';
-import { updateAdminStatus } from './machine-actions';
+import { updateUserRole } from './machine-services';
 import { operatingState } from './machine-states/operating';
 import {
   UpdateUserStatusMachineEvents,
@@ -37,8 +37,8 @@ export const createUpdateUserStatusMachine = ({
       },
     },
     {
-      actions: {
-        updateAdminStatus,
+      services: {
+        updateUserRole,
       },
     }
   );

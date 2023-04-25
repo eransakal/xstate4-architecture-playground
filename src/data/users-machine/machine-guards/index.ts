@@ -1,1 +1,1 @@
-export * from './is-event-of-own-user';
+export * from './is-ws-event-of-own-user';

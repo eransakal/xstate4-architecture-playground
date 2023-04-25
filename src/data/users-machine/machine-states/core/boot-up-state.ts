@@ -1,9 +1,9 @@
 import { UsersMachineStateConfig } from '../../types';
 export const bootUpState: UsersMachineStateConfig = {
   invoke: {
-    src: 'getUsersInformation',
+    src: 'getUsers',
     onDone: {
-      actions: ['updateUsersInformation', 'emitIsAdminChanged'],
+      actions: ['setUsers', 'emitUserRoleUpdated'],
       target: 'operating',
     },
   },

@@ -1,4 +1,3 @@
-
 export interface PollsMachineContext {
   __mockServerInfo__: {
     appInstance: string;

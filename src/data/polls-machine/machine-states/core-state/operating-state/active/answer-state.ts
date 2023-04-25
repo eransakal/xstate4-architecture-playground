@@ -20,12 +20,14 @@ export const answerPollState: PollsMachineStateConfig = {
     idle: {
       on: {
         [PollsMachineEventsTypes.AnswerPoll]: {
-          actions: ['sendAnswer'],
           target: 'inProgress',
         },
       },
     },
     inProgress: {
+      invoke: {
+        src: 'sendAnswer',
+      },
       on: {
         [PollsMachineEventsTypes.PollAnswered]: [
           {

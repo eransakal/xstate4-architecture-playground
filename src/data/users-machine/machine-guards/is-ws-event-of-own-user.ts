@@ -1,6 +1,6 @@
 import { UsersMachineContext, UsersMachineEvents } from '../types';
 
-export const isEventOfOwnUser = (
+export const isWSEventOfOwnUser = (
   context: UsersMachineContext,
   event: UsersMachineEvents
 ) => {

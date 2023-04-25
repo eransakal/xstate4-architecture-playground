@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useMemo,
-  PropsWithChildren,
-  useContext,
-} from 'react';
+import React, { useState, useMemo, PropsWithChildren, useContext } from 'react';
 import { PollsMachine, PollsMachineService } from './types';
 import { createPollsMachine } from './create-polls-machine';
 import { useMachine } from '@xstate/react';
@@ -11,8 +6,7 @@ import { createPollsMachineLogger } from './logger';
 import { getPollsSnapshot } from './machine-services/get-polls-snapshot';
 import {
   clearActivePollData,
-  endPoll,
-  sendAnswer,
+  requestEndPoll,
   setActivePollData,
   setUserVote,
   updateExternalInfo,
@@ -21,8 +15,11 @@ import {
   shouldAllowUserToAnswer,
   verifyExternalInformation,
 } from './machine-guards';
-import { onExternalInfoChanged } from './machine-services';
-import { startAPoll } from './machine-actions';
+import {
+  startAPoll,
+  sendAnswer,
+  onExternalInfoChanged,
+} from './machine-services';
 import { onPollStatusUpdated } from './machine-services';
 import { AppContext } from '../../app';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -39,15 +36,16 @@ export const PollsProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [, , machineService] = useMachine<PollsMachine>(machine, {
     devTools: inspectEnabled,
     actions: {
-      endPoll,
+      requestEndPoll,
       clearActivePollData,
       setActivePollData,
-      startAPoll,
-      sendAnswer,
+
       updateExternalInfo,
       setUserVote,
     },
     services: {
+      startAPoll,
+      sendAnswer,
       getPollsSnapshot,
       onExternalInfoChanged,
       onPollStatusUpdated,
