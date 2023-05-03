@@ -8,7 +8,7 @@ import { getUsers } from './machine-services/get-users';
 import { useXStateDiagnostics } from '../use-xstate-diagnostics';
 import { emitUserRoleUpdated } from './machine-actions/emit-user-role-updated';
 import { onUserRoleChanged } from './machine-services/on-user-role-changed';
-import { isWSEventOfOwnUser } from './machine-guards';
+import { isWSEventOfOwnUser, shouldHideList } from './machine-guards';
 import { updateUserRole } from './machine-actions/context/update-user-role';
 import { spawnUpdateUserRole } from './machine-actions/context/spawn-update-user-role';
 import { stopSpawnUpdateUserRole } from './machine-actions/context/stop-spawn-update-user-role';
@@ -39,6 +39,7 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
       onUserRoleChanged,
     },
     guards: {
+      shouldHideList,
       isWSEventOfOwnUser,
     },
   });

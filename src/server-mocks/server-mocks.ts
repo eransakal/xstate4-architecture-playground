@@ -8,7 +8,7 @@ const mock = new MockAdapter(axios, { delayResponse: 2000 });
 const usersData = [
   {
     id: 1,
-    name: 'Stas Kogut',
+    name: 'Stas Kohut',
     title: 'KME Team Member',
     avatar: 'stas.png',
     isAdmin: true,
