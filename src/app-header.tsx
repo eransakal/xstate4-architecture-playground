@@ -73,7 +73,7 @@ export const AppHeader: React.FC = () => {
                     Select
                   </Button>
                 </GridItem>
-                <GridItem>Stas Kogut</GridItem>
+                <GridItem>Stas Kohut</GridItem>
                 <GridItem>
                   <Button size="sm" onClick={() => select('app-instance-1')}>
                     Select
