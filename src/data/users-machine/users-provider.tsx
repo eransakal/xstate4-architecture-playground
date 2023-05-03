@@ -6,7 +6,7 @@ import { createUsersMachineLogger } from './logger';
 import { setUsers } from './machine-actions/context/set-users';
 import { getUsers } from './machine-services/get-users';
 import { useXStateDiagnostics } from '../use-xstate-diagnostics';
-import { emitUserRoleUpdated } from './machine-actions/emit-user-role-updated';
+import { emitOwnUserUpdated } from './machine-actions/emit-own-user-updated';
 import { onUserRoleChanged } from './machine-services/on-user-role-changed';
 import { isWSEventOfOwnUser, shouldHideList } from './machine-guards';
 import { updateUserRole } from './machine-actions/context/update-user-role';
@@ -29,7 +29,7 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
     devTools: inspectEnabled,
     actions: {
       spawnUpdateUserRole,
-      emitUserRoleUpdated,
+      emitOwnUserUpdated,
       stopSpawnUpdateUserRole,
       setUsers,
       updateUserRole,

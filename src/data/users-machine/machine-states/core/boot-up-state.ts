@@ -3,7 +3,7 @@ export const bootUpState: UsersMachineStateConfig = {
   invoke: {
     src: 'getUsers',
     onDone: {
-      actions: ['setUsers', 'emitUserRoleUpdated'],
+      actions: ['setUsers', 'emitOwnUserUpdated'],
       target: 'operating',
     },
   },

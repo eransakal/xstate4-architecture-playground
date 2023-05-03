@@ -20,7 +20,7 @@ export const operatingState: UsersMachineStateConfig = {
         actions: [
           'updateUserRole',
           'stopSpawnUpdateUserRole',
-          'emitUserRoleUpdated',
+          'emitOwnUserUpdated',
         ],
       },
       {
