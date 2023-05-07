@@ -1,5 +1,5 @@
-import { InterpreterFrom, Sender, State, StateMachine } from 'xstate';  
-import { StateNodeConfig } from 'xstate/lib/types';  
+import { InterpreterFrom, Sender, State, StateMachine } from 'xstate';
+import { StateNodeConfig } from 'xstate/lib/types';
 import { UsersMachineContext } from './context';
 import { UsersMachineEvents } from './events';
 

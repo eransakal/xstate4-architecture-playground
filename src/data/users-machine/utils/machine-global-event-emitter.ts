@@ -17,12 +17,16 @@ export function MachineGlobalEventEmitter<T>(props: Props<T>) {
 
   useEffect(() => {
     logger.log(
-      `subscribing from global event '${props.name}' (event context '${props.emitWithContext}')`
+      `waiting for '${props.name}' changes to emit ${
+        props.emitWithContext
+          ? ` (event context '${props.emitWithContext}')`
+          : ''
+      }`
     );
     const sub = usersMachineService.subscribe((state) => {
       const value = props.selector(state);
       if (!!value && value !== prefValueRef.current) {
-        logger.log(`broadcasting global event for '${props.name}'`);
+        logger.log(`emitting global event update for '${props.name}'`);
         prefValueRef.current = value;
         if (props.emitWithContext) {
           props.event.emitByApp(props.emitWithContext, value);
@@ -33,7 +37,11 @@ export function MachineGlobalEventEmitter<T>(props: Props<T>) {
     });
     return () => {
       logger.log(
-        `unsubscribing from global event '${props.name}' (event context '${props.emitWithContext}')`
+        `stop waiting for '${props.name}' changes to emit ${
+          props.emitWithContext
+            ? ` (event context '${props.emitWithContext}')`
+            : ''
+        }`
       );
       sub.unsubscribe();
     };

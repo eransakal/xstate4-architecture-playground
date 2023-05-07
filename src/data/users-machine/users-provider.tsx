@@ -55,7 +55,7 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
     <UsersContext.Provider value={providerValue}>
       <MachineGlobalEventEmitter
         emitWithContext={appInstance}
-        name={'onOwnUserChangedEvent'}
+        name={'ownUser'}
         selector={getOwnUser}
         event={onOwnUserChangedEvent}
       />
