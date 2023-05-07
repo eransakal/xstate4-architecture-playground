@@ -12,7 +12,6 @@ import { updateUserRole } from './machine-actions/context/update-user-role';
 import { spawnUpdateUserRole } from './machine-actions/context/spawn-update-user-role';
 import { stopSpawnUpdateUserRole } from './machine-actions/context/stop-spawn-update-user-role';
 import { AppContext } from '../../app';
-import { updateCalculatedFlags } from './machine-actions/update-calculated-flags';
 import { UsersContext } from './utils/users-context';
 import { MachineGlobalEventEmitter } from './utils/machine-global-event-emitter';
 import { getOwnUser } from './machine-selectors';
@@ -27,8 +26,7 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const [, , machineService] = useMachine<UsersMachine>(machine, {
     devTools: inspectEnabled,
-    actions: {
-      updateCalculatedFlags,
+    actions: {      
       spawnUpdateUserRole,    
       stopSpawnUpdateUserRole,
       setUsers,
