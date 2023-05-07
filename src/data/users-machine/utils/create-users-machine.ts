@@ -1,11 +1,11 @@
 import { createMachine } from 'xstate';
-import { coreState } from './machine-states/core';
-import { listState } from './machine-states/list-state';
+import { coreState } from '../machine-states/core';
+import { listState } from '../machine-states/list-state';
 import {
   UsersMachineContext,
   UsersMachineEvents,
   UsersMachineId,
-} from './types';
+} from '../types';
 
 export const createUsersMachine = ({
   appInstance,

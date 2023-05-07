@@ -10,14 +10,16 @@ import {
 
 export const onExternalInfoChanged =
   (context: PollsMachineContext, data: any) => (send: PollsMachineSender) => {
-    const handleOwnUserChanged = (ownUser: User) => {
-      send({
-        type: PollsMachineEventsTypes.ExternalInfoUpdated,
-        externalInfo: {
-          userId: ownUser.id,
-          isAdmin: ownUser.isAdmin,
-        },
-      });
+    const handleOwnUserChanged = (ownUser: User | null) => {
+      if (ownUser) {
+        send({
+          type: PollsMachineEventsTypes.ExternalInfoUpdated,
+          externalInfo: {
+            userId: ownUser.id,
+            isAdmin: ownUser.isAdmin,
+          },
+        });
+      }
     };
 
     onOwnUserChangedEvent.on(

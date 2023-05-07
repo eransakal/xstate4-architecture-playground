@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 import { UsersMachineEventsTypes } from './types';
-import { UsersContext } from './users-provider';
+import { UsersContext } from './utils/users-context';
 
 export const useUsersService = () => {
   const { usersMachineService } = useContext(UsersContext);
@@ -28,7 +28,6 @@ export const useUsersService = () => {
   }, [usersMachineService]);
 
   return {
-    usersMachineService,
     actions,
   };
 };

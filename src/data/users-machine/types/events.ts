@@ -6,6 +6,7 @@ export enum UsersMachineEventsTypes {
   UpdateUserRole = 'UpdatingUserRole',
   HideList = 'HideList',
   ShowList = 'ShowList',
+  EmitCanManageUsersList = 'EmitCanManageUsersList',
 }
 
 type invokeEvents = {

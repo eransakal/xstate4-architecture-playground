@@ -1,8 +1,6 @@
-import { UsersMachineId } from './types';
+import { UsersMachineId } from '../types';
 
-export const createUsersMachineLogger = (
-  sender: string
-) => ({
+export const createUsersMachineLogger = (sender: string) => ({
   log: (message: string, context?: Record<string, any>) => {
     console.log(`[${UsersMachineId}:${sender}] ${message}`, context);
   },

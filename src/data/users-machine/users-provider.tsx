@@ -1,25 +1,25 @@
 import React, { useState, useMemo, PropsWithChildren, useContext } from 'react';
-import { UsersMachine, UsersMachineService } from './types';
-import { createUsersMachine } from './create-users-machine';
+import { UsersMachine } from './types';
+import { createUsersMachine } from './utils/create-users-machine';
 import { useMachine } from '@xstate/react';
-import { createUsersMachineLogger } from './logger';
+import { createUsersMachineLogger } from './utils/logger';
 import { setUsers } from './machine-actions/context/set-users';
 import { getUsers } from './machine-services/get-users';
 import { useXStateDiagnostics } from '../use-xstate-diagnostics';
-import { emitOwnUserUpdated } from './machine-actions/emit-own-user-updated';
 import { onUserRoleChanged } from './machine-services/on-user-role-changed';
 import { isWSEventOfOwnUser, shouldHideList } from './machine-guards';
 import { updateUserRole } from './machine-actions/context/update-user-role';
 import { spawnUpdateUserRole } from './machine-actions/context/spawn-update-user-role';
 import { stopSpawnUpdateUserRole } from './machine-actions/context/stop-spawn-update-user-role';
 import { AppContext } from '../../app';
+import { updateCalculatedFlags } from './machine-actions/update-calculated-flags';
+import { UsersContext } from './utils/users-context';
+import { MachineGlobalEventEmitter } from './utils/machine-global-event-emitter';
+import { getOwnUser } from './machine-selectors';
+import { onOwnUserChangedEvent } from './global-events';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const logger = createUsersMachineLogger('XState Machine');
-
-export const UsersContext = React.createContext<{
-  usersMachineService: UsersMachineService;
-}>(null as any);
 
 export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { appInstance, inspectEnabled } = useContext(AppContext);
@@ -28,8 +28,8 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [, , machineService] = useMachine<UsersMachine>(machine, {
     devTools: inspectEnabled,
     actions: {
-      spawnUpdateUserRole,
-      emitOwnUserUpdated,
+      updateCalculatedFlags,
+      spawnUpdateUserRole,    
       stopSpawnUpdateUserRole,
       setUsers,
       updateUserRole,
@@ -55,6 +55,12 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <UsersContext.Provider value={providerValue}>
+      <MachineGlobalEventEmitter
+        emitWithContext={appInstance}
+        name={'onOwnUserChangedEvent'}
+        selector={getOwnUser}
+        event={onOwnUserChangedEvent}
+      />
       {children}
     </UsersContext.Provider>
   );

@@ -10,7 +10,7 @@ export interface User {
 export interface UsersMachineContext {
   __mockServerInfo__: {
     appInstance: string;
-  };
+  }; 
   ownUser: User | null;
   users: User[];
 }

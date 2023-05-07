@@ -1,6 +1,8 @@
 import { useSelector } from '@xstate/react';
 import { UsersMachineState } from './types';
 import { useUsersService } from './use-users-service';
+import { useContext } from 'react';
+import { UsersContext } from './utils/users-context';
 
 type UsersSelectors<
   T extends
@@ -19,7 +21,7 @@ export const useUsersUpdates = <
 >(
   selectors: T
 ): UsersSelectors<T> => {
-  const { usersMachineService } = useUsersService();
+  const { usersMachineService } = useContext(UsersContext);
 
   let selector: (state: UsersMachineState) => any = () => {};
 
