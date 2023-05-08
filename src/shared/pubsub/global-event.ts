@@ -13,7 +13,7 @@ interface Listener<T> {
   /** Indicates if they should be removed after one emit. */
   once: boolean;
 
-  appId?: string;
+  contextId?: string;
   /** The callback to invoke. */
   callback: (args: T) => void;
 
@@ -25,7 +25,7 @@ export class GlobalEvent<T = undefined> {
   /** All the current listeners for this event. */
   private listeners: Array<Listener<T>> = [];
   private lastEmittedValue: T | null = null;
-  private lastEmittedValueByApp: Record<string, T> = {};
+  private lastEmittedValueByContext: Record<string, T> = {};
   /**
    * Attaches a listener to trigger on all emits for this event.
    *
@@ -35,16 +35,16 @@ export class GlobalEvent<T = undefined> {
   public on(
     callback: (data: T) => void,
     emitLastValue: boolean,
-    appId?: string
+    contextId?: string
   ): void {
     this.listeners.push({
       once: false,
-      appId,
+      contextId,
       callback,
     });
 
-    if (appId && emitLastValue && this.lastEmittedValueByApp[appId]) {
-      callback(this.lastEmittedValueByApp[appId]);
+    if (contextId && emitLastValue && this.lastEmittedValueByContext[contextId]) {
+      callback(this.lastEmittedValueByContext[contextId]);
     } else if (emitLastValue && this.lastEmittedValue) {
       callback(this.lastEmittedValue);
     }
@@ -168,22 +168,22 @@ export class GlobalEvent<T = undefined> {
    * Returns true if the event had listeners emitted to,
    * false otherwise.
    *
-   * @param appId - The app that should get the event
+   * @param contextId - The context that this event is relevant for
    * @param emitting - If the Event has a type, this is the data of that type
    * to emit to all listeners. If no type (never) this argument should
    * be omitted.
    * @returns True if the event had listeners emitted to, false otherwise.
    */
-  public readonly emitByApp: [T] extends [undefined]
-    ? (appId: string) => boolean
-    : (appId: string, emitting: T) => boolean = ((
-    appId: string,
+  public readonly emitByContext: [T] extends [undefined]
+    ? (contextId: string) => boolean
+    : (contextId: string, emitting: T) => boolean = ((
+    contextId: string,
     emitting?: T
   ) /* undefined only valid for singals */ => {
-    this.lastEmittedValueByApp[appId] = emitting as T;
+    this.lastEmittedValueByContext[contextId] = emitting as T;
     const hadListeners = this.listeners.length > 0;
     for (const listener of this.listeners) {
-      if (listener.appId === appId) {
+      if (listener.contextId === contextId) {
         listener.callback(emitting as T);
       }
     }
@@ -192,6 +192,6 @@ export class GlobalEvent<T = undefined> {
     this.listeners = this.listeners.filter((l) => !l.once);
     return hadListeners;
   }) as [T] extends [undefined]
-    ? (appId: string) => boolean
-    : (appId: string, data: T) => boolean;
+    ? (contextId: string) => boolean
+    : (contextId: string, data: T) => boolean;
 }

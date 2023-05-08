@@ -19,7 +19,10 @@ export type PollsMachineService = InterpreterFrom<PollsMachine>;
 export type PollsMachineSender = Sender<PollsMachineEvents>;
 export type PollsMachineState = State<
   PollsMachineContext,
-  PollsMachineEvents
+  PollsMachineEvents,
+  any,
+  any,
+  any
 >;
 export type PollsMachineStateConfig = StateNodeConfig<
   PollsMachineContext,

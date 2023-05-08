@@ -1,5 +1,5 @@
 import { assign } from '@xstate/immer';
-import { createPollsMachineLogger } from '../../logger';
+import { createPollsMachineLogger } from '../../utils/logger';
 import {
   PollsMachineContext,
   PollsMachineEvents,

@@ -1,5 +1,5 @@
-import { InterpreterFrom, Sender, State, StateMachine } from 'xstate';  
-import { StateNodeConfig } from 'xstate/lib/types';  
+import { InterpreterFrom, Sender, State, StateMachine } from 'xstate';
+import { StateNodeConfig } from 'xstate/lib/types';
 import { UsersMachineContext } from './context';
 import { UsersMachineEvents } from './events';
 
@@ -19,7 +19,10 @@ export type UsersMachineService = InterpreterFrom<UsersMachine>;
 export type UsersMachineSender = Sender<UsersMachineEvents>;
 export type UsersMachineState = State<
   UsersMachineContext,
-  UsersMachineEvents
+  UsersMachineEvents,
+  any,
+  any,
+  any
 >;
 export type UsersMachineStateConfig = StateNodeConfig<
   UsersMachineContext,

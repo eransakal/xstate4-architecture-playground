@@ -17,11 +17,7 @@ export const operatingState: UsersMachineStateConfig = {
     [UsersMachineEventsTypes.UserRoleUpdated]: [
       {
         cond: 'isWSEventOfOwnUser',
-        actions: [
-          'updateUserRole',
-          'stopSpawnUpdateUserRole',
-          'emitOwnUserUpdated',
-        ],
+        actions: ['updateUserRole', 'stopSpawnUpdateUserRole'],
       },
       {
         actions: ['updateUserRole', 'stopSpawnUpdateUserRole'],
