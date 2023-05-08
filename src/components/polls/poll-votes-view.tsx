@@ -11,7 +11,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { usePollsService } from '../../data/polls-machine/use-polls-service';
 import { PollIcon } from './poll-icon';
 import { pollsMetadata, PollMetadata } from './polls-metadata';
-import { useSelector } from '@xstate/react';
 import {
   getIsPollPrivate,
   getIsStopPollInProgress,

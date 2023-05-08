@@ -1,6 +1,5 @@
 import { useSelector } from '@xstate/react';
 import { PollsMachineState } from './types';
-import { usePollsService } from './use-polls-service';
 import { useContext } from 'react';
 import { PollsContext } from './utils/polls-context';
 
