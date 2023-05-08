@@ -26,8 +26,8 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const [, , machineService] = useMachine<UsersMachine>(machine, {
     devTools: inspectEnabled,
-    actions: {      
-      spawnUpdateUserRole,    
+    actions: {
+      spawnUpdateUserRole,
       stopSpawnUpdateUserRole,
       setUsers,
       updateUserRole,
@@ -59,6 +59,7 @@ export const UsersProvider: React.FC<PropsWithChildren> = ({ children }) => {
         selector={getOwnUser}
         event={onOwnUserChangedEvent}
       />
+      
       {children}
     </UsersContext.Provider>
   );
