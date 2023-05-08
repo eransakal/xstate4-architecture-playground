@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 import { PollsMachineEventsTypes } from './types';
-import { PollsContext } from './polls-provider';
+import { PollsContext } from './utils/polls-context';
 
 export const usePollsService = () => {
   const { pollsMachineService } = useContext(PollsContext);
@@ -29,7 +29,6 @@ export const usePollsService = () => {
   }, [pollsMachineService]);
 
   return {
-    pollsMachineService,
     actions,
   };
 };

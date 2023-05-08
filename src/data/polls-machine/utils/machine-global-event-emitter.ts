@@ -1,18 +1,18 @@
 import React, { useContext, useEffect } from 'react';
-import { UsersContext } from './users-context';
-import { createUsersMachineLogger } from './logger';
-import { UsersMachineState } from '../types';
+import { PollsContext } from './polls-context';
+import { createPollsMachineLogger } from './logger';
+import { PollsMachineState } from '../types';
 import { GlobalEvent } from '../../../shared/pubsub/global-event';
 
 export interface Props<TValue> {
   name: string;
-  selector: (state: UsersMachineState) => TValue;
+  selector: (state: PollsMachineState) => TValue;
   event: GlobalEvent<TValue>;
   emitWithContext?: string;
 }
-const logger = createUsersMachineLogger('globalEventEmitter');
+const logger = createPollsMachineLogger('globalEventEmitter');
 export function MachineGlobalEventEmitter<T>(props: Props<T>) {
-  const { usersMachineService } = useContext(UsersContext);
+  const { pollsMachineService } = useContext(PollsContext);
   const prefValueRef = React.useRef<any>(undefined);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export function MachineGlobalEventEmitter<T>(props: Props<T>) {
           : ''
       }`
     );
-    const sub = usersMachineService.subscribe((state) => {
+    const sub = pollsMachineService.subscribe((state) => {
       const value = props.selector(state);
       if (!!value && value !== prefValueRef.current) {
         logger.log(`emitting global event update for '${props.name}'`);
@@ -47,7 +47,7 @@ export function MachineGlobalEventEmitter<T>(props: Props<T>) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    usersMachineService,
+    pollsMachineService,
     props.name,
     props.selector,
     props.event,

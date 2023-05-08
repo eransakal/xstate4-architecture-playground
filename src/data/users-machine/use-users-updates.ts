@@ -1,6 +1,5 @@
 import { useSelector } from '@xstate/react';
 import { UsersMachineState } from './types';
-import { useUsersService } from './use-users-service';
 import { useContext } from 'react';
 import { UsersContext } from './utils/users-context';
 

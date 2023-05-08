@@ -1,8 +1,8 @@
 import React, { useState, useMemo, PropsWithChildren, useContext } from 'react';
-import { PollsMachine, PollsMachineService } from './types';
-import { createPollsMachine } from './create-polls-machine';
+import { PollsMachine } from './types';
+import { createPollsMachine } from './utils/create-polls-machine';
 import { useMachine } from '@xstate/react';
-import { createPollsMachineLogger } from './logger';
+import { createPollsMachineLogger } from './utils/logger';
 import { getPollsSnapshot } from './machine-services/get-polls-snapshot';
 import {
   clearActivePollData,
@@ -22,12 +22,11 @@ import {
 } from './machine-services';
 import { onPollStatusUpdated } from './machine-services';
 import { AppContext } from '../../app';
+import { PollsContext } from './utils/polls-context';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const logger = createPollsMachineLogger('Polls Provider');
 
-export const PollsContext = React.createContext<{
-  pollsMachineService: PollsMachineService;
-}>(null as any);
+
 
 export const PollsProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { appInstance, inspectEnabled } = useContext(AppContext);

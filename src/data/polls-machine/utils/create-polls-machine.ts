@@ -1,10 +1,10 @@
 import { createMachine } from 'xstate';
-import { coreState } from './machine-states/core-state';
+import { coreState } from '../machine-states/core-state';
 import {
   PollsMachineContext,
   PollsMachineEvents,
   PollsMachineId,
-} from './types';
+} from '../types';
 
 export const createPollsMachine = ({
   appInstance,
