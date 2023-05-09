@@ -54,5 +54,11 @@ export function MachineGlobalEventEmitter<T>(props: Props<T>) {
     props.emitWithContext,
   ]);
 
+  useEffect(() => {
+    return () => {
+      props.event.resetLastValue(props.emitWithContext);
+    };
+  }, [props.event, props.emitWithContext]);
+
   return null;
 }

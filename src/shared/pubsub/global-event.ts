@@ -24,7 +24,7 @@ interface Listener<T> {
 export class GlobalEvent<T = undefined> {
   /** All the current listeners for this event. */
   private listeners: Array<Listener<T>> = [];
-  private lastEmittedValue: T | null = null;
+  private lastEmittedValue: T | undefined = undefined;
   private lastEmittedValueByContext: Record<string, T> = {};
   /**
    * Attaches a listener to trigger on all emits for this event.
@@ -43,10 +43,15 @@ export class GlobalEvent<T = undefined> {
       callback,
     });
 
-    if (contextId && emitLastValue && this.lastEmittedValueByContext[contextId]) {
-      callback(this.lastEmittedValueByContext[contextId]);
-    } else if (emitLastValue && this.lastEmittedValue) {
-      callback(this.lastEmittedValue);
+    if (emitLastValue) {
+      if (
+        contextId &&
+        typeof this.lastEmittedValueByContext[contextId] !== 'undefined'
+      ) {
+        callback(this.lastEmittedValueByContext[contextId]);
+      } else if (typeof this.lastEmittedValue !== 'undefined') {
+        callback(this.lastEmittedValue);
+      }
     }
   }
 
@@ -162,6 +167,14 @@ export class GlobalEvent<T = undefined> {
     this.listeners = this.listeners.filter((l) => !l.once);
     return hadListeners;
   }) as [T] extends [undefined] ? () => boolean : (data: T) => boolean;
+
+  public resetLastValue(context?: string): void {
+    if (context) {
+      delete this.lastEmittedValueByContext[context];
+    } else {
+      this.lastEmittedValue = undefined;
+    }
+  }
 
   /**
    * Emits a value to all the listeners, triggering their callbacks.
