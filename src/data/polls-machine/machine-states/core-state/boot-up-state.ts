@@ -45,6 +45,7 @@ export const bootUpState: PollsMachineStateConfig = {
         inProgress: {
           invoke: [
             {
+              id: 'loadPollsData',
               src: 'getPollsSnapshot',
               onDone: {
                 actions: ['setActivePollData'],

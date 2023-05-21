@@ -10,8 +10,9 @@ export enum PollsMachineEventsTypes {
   AnswerPoll = 'AnswerPoll',
 }
 
+
 type invokeEvents = {
-  type: 'done.invoke.polls.core.bootUp.loadPollData.inProgress:invocation[0]';
+  type: 'done.invoke.loadPollsData';
   data: null | {
     isPrivate: boolean;
     pollType: string;

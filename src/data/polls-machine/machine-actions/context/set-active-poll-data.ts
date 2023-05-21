@@ -15,10 +15,7 @@ export const setActivePollData = assign(
       context.pollType = event.pollType;
       context.pollCreator = event.pollCreator;
       context.isPrivate = event.isPrivate;
-    } else if (
-      event.type ===
-      'done.invoke.polls.core.bootUp.loadPollData.inProgress:invocation[0]'
-    ) {
+    } else if (event.type === `done.invoke.loadPollsData`) {
       if (event.data?.pollType) {
         logger.log(
           `has active poll in progress (poll type '${event.data.pollType}')`
