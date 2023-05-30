@@ -6,10 +6,11 @@ export enum UsersMachineEventsTypes {
   UpdateUserRole = 'UpdatingUserRole',
   HideList = 'HideList',
   ShowList = 'ShowList',  
+  ManageUsersListUpdated = 'ManageUsersListUpdated'
 }
 
 type invokeEvents = {
-  type: 'done.invoke.users.core.bootUp:invocation[0]';
+  type: 'done.invoke.getUsers';
   data: {
     ownUser: User;
     users: User[];
@@ -39,4 +40,7 @@ export type UsersMachineEvents =
   | UpdateUserRoleFailureEvent
   | {
       type: UsersMachineEventsTypes.ShowList;
-    };
+    }
+    | {
+      type: UsersMachineEventsTypes.ManageUsersListUpdated
+    }

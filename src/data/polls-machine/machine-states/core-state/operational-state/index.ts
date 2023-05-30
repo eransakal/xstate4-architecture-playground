@@ -6,7 +6,7 @@ import {
 import { inactiveState } from './inactive';
 import { activeState } from './active';
 
-export const operatingState: PollsMachineStateConfig = {
+export const operationalState: PollsMachineStateConfig = {
   initial: 'unknown',
   invoke: [
     {

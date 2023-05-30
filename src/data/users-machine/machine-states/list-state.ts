@@ -1,16 +1,15 @@
+import { canManageUsersList } from '../calculated-values/can-manage-users-list';
 import { UsersMachineEventsTypes, UsersMachineStateConfig } from '../types';
 
 export const listState: UsersMachineStateConfig = {
-  initial: 'hidden',
+  initial: 'hidden',  
   states: {
     visible: {
-      always: [
-        {
-          cond: 'shouldHideList',
-          target: 'hidden',
-        },
-      ],
       on: {
+        [UsersMachineEventsTypes.ManageUsersListUpdated]: {
+            cond: (context) => !canManageUsersList(context),
+            target: 'hidden',
+          },
         [UsersMachineEventsTypes.HideList]: {
           target: 'hidden',
         },
@@ -19,7 +18,7 @@ export const listState: UsersMachineStateConfig = {
     hidden: {
       on: {
         [UsersMachineEventsTypes.ShowList]: {
-          cond: (context) => !!context.ownUser?.isAdmin,
+          cond: (context) => canManageUsersList(context),            
           target: 'visible',
         },
       },

@@ -2,7 +2,7 @@ import { PollsMachineEventsTypes, PollsMachineStateConfig } from '../../types';
 export const bootUpState: PollsMachineStateConfig = {
   type: 'parallel',
   onDone: {
-    target: 'operating',
+    target: 'operational',
   },
   states: {
     syncExternalInformation: {

@@ -1,12 +1,12 @@
 import { PollsMachineStateConfig } from '../../types';
 import { bootUpState } from './boot-up-state';
-import { operatingState } from './operating-state';
+import { operationalState } from './operational-state';
 
 export const coreState: PollsMachineStateConfig = {
   id: 'core',
   initial: 'bootUp',
   states: {
     bootUp: bootUpState,
-    operating: operatingState,
+    operational: operationalState,
   },
 };

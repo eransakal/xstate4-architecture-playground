@@ -1,0 +1,11 @@
+{
+  "globals": {},
+  "machines": {
+    "users": {
+      "path": "src/data/users-machine"
+    },
+    "polls": {
+      "path": "src/data/polls-machine"
+    }
+  }
+}

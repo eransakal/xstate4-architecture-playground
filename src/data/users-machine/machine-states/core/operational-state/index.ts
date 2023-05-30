@@ -3,7 +3,7 @@ import {
   UsersMachineStateConfig,
 } from '../../../types';
 
-export const operatingState: UsersMachineStateConfig = {
+export const operationalState: UsersMachineStateConfig = {
   on: {
     [UsersMachineEventsTypes.UpdateUserRole]: {
       cond: (context) => {

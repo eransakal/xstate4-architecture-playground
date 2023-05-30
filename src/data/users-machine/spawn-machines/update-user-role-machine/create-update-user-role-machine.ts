@@ -1,6 +1,6 @@
 import { createMachine } from 'xstate';
 import { updateUserRole } from './machine-services';
-import { operatingState } from './machine-states/operating';
+import { operationalState } from './machine-states/operational-state';
 import {
   UpdateUserRoleMachineEvents,
   UpdateUserRoleMachineContext,
@@ -31,9 +31,9 @@ export const createUpdateUserRoleMachine = ({
       },
       predictableActionArguments: true,
       preserveActionOrder: true,
-      initial: 'operating',
+      initial: 'operational',
       states: {
-        operating: operatingState,
+        operational: operationalState,
       },
     },
     {

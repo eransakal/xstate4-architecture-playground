@@ -2,7 +2,7 @@ import { actions } from 'xstate';
 import { UsersMachineEventsTypes } from '../../../../types';
 import { UpdateUserRoleMachineStateConfig } from '../../types';
 
-export const operatingState: UpdateUserRoleMachineStateConfig = {
+export const operationalState: UpdateUserRoleMachineStateConfig = {
   initial: 'inProgress',
   states: {
     inProgress: {
