@@ -3,6 +3,7 @@ import React, { PropsWithChildren, useMemo } from 'react';
 import { AppContainer } from './components/app-container';
 import { PollsProvider } from './data/polls-machine/polls-provider';
 import { UsersProvider } from './data/users-machine/users-provider';
+import { UserPollsProvider } from './data/user-polls-machine';
 
 export const AppContext = React.createContext<{
   appInstance: string;
@@ -50,9 +51,11 @@ export const App: React.FC<{
     <AppContext.Provider value={providerValue}>
       <UsersProvider>
         <DelayedContent>
-          <PollsProvider>
-            <AppContainer />
-          </PollsProvider>
+          <UserPollsProvider>
+            <PollsProvider>
+              <AppContainer />
+            </PollsProvider>
+          </UserPollsProvider>
         </DelayedContent>
       </UsersProvider>
     </AppContext.Provider>
