@@ -1,4 +1,4 @@
-import { answerPollState } from "./answer-poll-state";
+import { answerPollState } from "./active-states/answer-poll-state";
 import {
   UserPollsMachineEventsTypes,
   UserPollsMachineStateConfig,

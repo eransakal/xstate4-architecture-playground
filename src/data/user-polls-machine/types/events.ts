@@ -5,6 +5,8 @@ export enum UserPollsMachineEventsTypes {
   ExternalInfoLoaded = 'ExternalInfoLoaded',
   UpdateUserAnswer = 'UpdateUserAnswer',
   UserAnswerUpdated = 'UserAnswerUpdated',
+  StartPollUpdated = "StartPollUpdated",
+  UpdateStartPoll = "UpdateStartPoll"
 }
 
 // TODO add reference to example
@@ -27,6 +29,12 @@ export type UserPollsMachineEvents =
     {
       type: UserPollsMachineEventsTypes.UserAnswerUpdated; 
       answer: string;     
+    } 
+    | {
+      type: UserPollsMachineEventsTypes.StartPollUpdated;       
+    } 
+    | {
+      type: UserPollsMachineEventsTypes.UpdateStartPoll; 
     } 
     
 

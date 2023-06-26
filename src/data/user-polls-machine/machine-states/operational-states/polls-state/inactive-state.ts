@@ -5,6 +5,5 @@ import {
 
 export const inactiveState: UserPollsMachineStateConfig = {
   states: {
-    
   },
 };

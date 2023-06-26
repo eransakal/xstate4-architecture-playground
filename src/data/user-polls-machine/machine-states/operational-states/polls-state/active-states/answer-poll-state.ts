@@ -1,4 +1,4 @@
-import { UserPollsMachineEventsTypes , UserPollsMachineStateConfig } from '../../../types';
+import { UserPollsMachineEventsTypes , UserPollsMachineStateConfig } from '../../../../types';
 
 export const answerPollState: UserPollsMachineStateConfig = {
   initial: 'idle',

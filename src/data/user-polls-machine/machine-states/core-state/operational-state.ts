@@ -1,4 +1,4 @@
-import { pollsState } from "./polls-state";
+import { pollsState } from "../operational-states/polls-state";
 import {
   UserPollsMachineStateConfig,
 } from '../../types';
