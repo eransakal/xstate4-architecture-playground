@@ -4,6 +4,7 @@ import { AppContainer } from './components/app-container';
 import { PollsProvider } from './data/polls-machine/polls-provider';
 import { UsersProvider } from './data/users-machine/users-provider';
 import { UserPollsProvider } from './data/user-polls-machine';
+import { UserPolls2Provider } from './data/user-polls2-machine';
 
 export const AppContext = React.createContext<{
   appInstance: string;
@@ -52,9 +53,11 @@ export const App: React.FC<{
       <UsersProvider>
         <DelayedContent>
           <UserPollsProvider>
+            <UserPolls2Provider>
             <PollsProvider>
               <AppContainer />
             </PollsProvider>
+            </UserPolls2Provider>
           </UserPollsProvider>
         </DelayedContent>
       </UsersProvider>
