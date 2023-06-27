@@ -5,11 +5,6 @@ import {
   UserPollsMachineEventsTypes,
 } from '../../types';
 
-/*
-const logger =  createUpdateExternalInfoMachineLogger(
-    'UpdateExternalInfoProvider'
-  );
-*/
 export const updateExternalInfo = actions.assign(
   (context: UserPollsMachineContext, event: UserPollsMachineEvents) => {
     if (event.type !== UserPollsMachineEventsTypes.ExternalInfoUpdated) {

@@ -3,10 +3,11 @@ import { UserPollsContext } from './user-polls-context';
 import { UserPollsMachineState } from '../types';
 import { GlobalEvent } from '../../../shared/pubsub/global-event';
 import { useSelector } from '@xstate/react';
+
 import { createUserPollsMachineLogger } from './logger';
 
 const logger =  createUserPollsMachineLogger(
-    'UserPollsProvider'
+    'MachineGlobalEventEmitter'
   );
 
 export interface Props<TValue> {

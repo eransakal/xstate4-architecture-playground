@@ -1,41 +1,45 @@
 import React, { useState, useMemo, PropsWithChildren, useContext } from 'react';
 import {
-  UserPollsMachine, UserPollsMachineEventsTypes
+  UserPollsMachine,
+  UserPollsMachineEventsTypes
 } from './types';
 import { createUserPollsMachine } from './utils/create-user-polls-machine';
 import { useMachine } from '@xstate/react';
 import { UserPollsContext } from './utils/user-polls-context';
 import { updateExternalInfo } from './machine-actions/context/update-external-info';
-import { updateUserAnswer } from './machine-actions/context/update-user-answer';
-import { updateIntermediateUserAnswer } from './machine-actions/context/update-intermediate-user-answer';
-import { clearIntermediateUserAnswer } from './machine-actions/context/clear-intermediate-user-answer';
-import { MachineCalculatedValueEmitter } from './utils/machine-calculated-value-emitter';
-import { externalInfoLoaded } from './calculated-value/external-info-loaded';
-import { AppContext } from '../../app';
 import { onExternalInfoUpdated } from './machine-services/on-external-info-updated';
-import { getPollsSnapshot } from './machine-services/get-polls-snapshot';
-import { onExternalInfoLoaded } from './machine-guards/verify-external-info';
+import { MachineCalculatedValueEmitter } from './utils/machine-calculated-value-emitter';
+import { isExternalInfoLoaded } from './machine-guards/is-external-info-loaded';
 
+import { createUserPollsMachineLogger } from './utils/logger';
+import { AppContext } from '../../app';
+import { getPollsSnapshot } from './machine-services/get-polls-snapshot';
+import { setActivePollData } from './machine-actions/context/set-active-poll-data';
+
+const logger =  createUserPollsMachineLogger(
+    'userPollsProvider'
+  );
 
 export const UserPollsProvider: React.FC<PropsWithChildren> = ({ children }) => {
  
   const { appInstance, inspectEnabled } = useContext(AppContext);
- const [machine] = useState(() => createUserPollsMachine({appInstance}));
+ 
+ const [machine] = useState(() => createUserPollsMachine({
+  appInstance
+ }));
 
   const [, , userPollsMachineService] = useMachine<UserPollsMachine>(machine, {
     devTools: inspectEnabled,
     actions: {
       updateExternalInfo,
-      updateUserAnswer,
-      updateIntermediateUserAnswer,
-      clearIntermediateUserAnswer
+      setActivePollData
     },
     services: {
       onExternalInfoUpdated,
       getPollsSnapshot
      },
     guards: { 
-      onExternalInfoLoaded
+      isExternalInfoLoaded
     },
   });
 
@@ -45,8 +49,8 @@ export const UserPollsProvider: React.FC<PropsWithChildren> = ({ children }) => 
 
   return (
     <UserPollsContext.Provider value={providerValue}>
-      <MachineCalculatedValueEmitter
-      formula={externalInfoLoaded}
+     <MachineCalculatedValueEmitter
+      formula={isExternalInfoLoaded}
       event={
         (value) => {
           return {
@@ -55,9 +59,7 @@ export const UserPollsProvider: React.FC<PropsWithChildren> = ({ children }) => 
           }
         }
       }
-      
       />
-      
       {children}
     </UserPollsContext.Provider>
   );

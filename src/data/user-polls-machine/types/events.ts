@@ -2,19 +2,28 @@ import { UserPollsMachineContext } from "./context";
 
 export enum UserPollsMachineEventsTypes {
   ExternalInfoUpdated = 'ExternalInfoUpdated',
-  ExternalInfoLoaded = 'ExternalInfoLoaded',
-  UpdateUserAnswer = 'UpdateUserAnswer',
-  UserAnswerUpdated = 'UserAnswerUpdated',
-  StartPollUpdated = "StartPollUpdated",
-  UpdateStartPoll = "UpdateStartPoll"
+  ExternalInfoLoaded = 'ExternalInfoLoaded'
 }
 
 // TODO add reference to example
-// type invokeEvents = unknown;
+type invokeEvents = {
+  type: 'done.invoke.loadUserPollsData',
+  data: null | {
+    isPrivate: boolean;
+    pollType: string;
+    pollCreator: number;
+    answers: {
+      userId: number;
+      userName: string;
+      userAvatar: string | null;
+      answerId: string;
+    }[];
+  };
+};
 
 export type UserPollsMachineEvents = 
-  //  | invokeEvents
-   {
+  invokeEvents 
+  | {
     type: UserPollsMachineEventsTypes.ExternalInfoLoaded;      
     loaded: boolean
   }
@@ -22,20 +31,6 @@ export type UserPollsMachineEvents =
       type: UserPollsMachineEventsTypes.ExternalInfoUpdated;
       externalInfo: Partial<UserPollsMachineContext['externalInfo']>;
     }
-    | {
-      type: UserPollsMachineEventsTypes.UpdateUserAnswer;
-      answer: string;
-    } |
-    {
-      type: UserPollsMachineEventsTypes.UserAnswerUpdated; 
-      answer: string;     
-    } 
-    | {
-      type: UserPollsMachineEventsTypes.StartPollUpdated;       
-    } 
-    | {
-      type: UserPollsMachineEventsTypes.UpdateStartPoll; 
-    } 
     
 
 

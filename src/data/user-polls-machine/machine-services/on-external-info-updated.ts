@@ -1,9 +1,10 @@
 import { User, onOwnUserChangedEvent } from '../../users-machine';
 import {
   UserPollsMachineContext,
-  UserPollsMachineEventsTypes,
   UserPollsMachineSender,
+  UserPollsMachineEventsTypes
 } from '../types';
+
 import { createUserPollsMachineLogger } from '../utils/logger';
 
 const logger =  createUserPollsMachineLogger(

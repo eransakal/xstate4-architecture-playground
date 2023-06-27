@@ -11,8 +11,8 @@ export interface UserPollsMachineContext {
       isPrivate: boolean;
       pollCreator: number | null;
       pollType: null | string;
-      userAnswer: string | null;
-      UserAnswerIntermediate: string | null;
+      userVoted: boolean;
+      UserVotedIntermediate: boolean | null;
       pollVotes:
         | {
             userId: number;
@@ -34,7 +34,7 @@ export const createDefaultUserPollsMachineContext = (appInstance: string): UserP
       isPrivate: false,
       pollCreator: null,
       pollType: null,
-      userAnswer: null,
-      UserAnswerIntermediate: null,
+      userVoted: false,
+      UserVotedIntermediate: null,
       pollVotes: null,
 })

@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import { UserPollsContext } from './user-polls-context';
 import { UserPollsMachineContext, UserPollsMachineEvents, UserPollsMachineState } from '../types';
 import { useSelector } from '@xstate/react';
+
 import { createUserPollsMachineLogger } from './logger';
 
 const logger =  createUserPollsMachineLogger(
     'MachineCalculatedValueEmitter'
   );
-
 
 export interface Props<TValue> {  
   formula: (context: UserPollsMachineContext) => TValue;

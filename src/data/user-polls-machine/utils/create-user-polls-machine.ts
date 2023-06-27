@@ -4,8 +4,8 @@ import {
   UserPollsMachineContext,
   UserPollsMachineEvents,
   UserPollsMachineEventsTypes,
-  UserPollsMachineId,
-  createDefaultUserPollsMachineContext,  
+  UserPollsMachineId,  
+  createDefaultUserPollsMachineContext
 } from '../types';
 
 export const createUserPollsMachine = ({
@@ -18,20 +18,21 @@ export const createUserPollsMachine = ({
     predictableActionArguments: true,
     preserveActionOrder: true,
     type: 'parallel',
-    on: {
-      [UserPollsMachineEventsTypes.ExternalInfoUpdated]: {
-        actions: 'updateExternalInfo',
-      }
-    },
     invoke: {
       src: 'onExternalInfoUpdated',
       data: {
         emitLastValue: true
       }
     },
+    on: {
+      [UserPollsMachineEventsTypes.ExternalInfoUpdated]: {
+        actions: 'updateExternalInfo',        
+      },
+    },
     states: {
       core: coreState
     },
   }).withContext(
     createDefaultUserPollsMachineContext(appInstance)
-  )}
+  );
+};
