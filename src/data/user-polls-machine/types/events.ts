@@ -2,7 +2,9 @@ import { UserPollsMachineContext } from "./context";
 
 export enum UserPollsMachineEventsTypes {
   ExternalInfoUpdated = 'ExternalInfoUpdated',
-  ExternalInfoLoaded = 'ExternalInfoLoaded'
+  ExternalInfoLoaded = 'ExternalInfoLoaded',
+  StartPoll = 'StartPoll',
+  ShowNotification = 'ShowNotification',
 }
 
 // TODO add reference to example
@@ -26,6 +28,9 @@ export type UserPollsMachineEvents =
   | {
     type: UserPollsMachineEventsTypes.ExternalInfoLoaded;      
     loaded: boolean
+  }
+  | {
+    type: UserPollsMachineEventsTypes.StartPoll;          
   }
   | {
       type: UserPollsMachineEventsTypes.ExternalInfoUpdated;

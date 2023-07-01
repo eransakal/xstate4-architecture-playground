@@ -15,6 +15,7 @@ import { createUserPollsMachineLogger } from './utils/logger';
 import { AppContext } from '../../app';
 import { getPollsSnapshot } from './machine-services/get-polls-snapshot';
 import { setActivePollData } from './machine-actions/context/set-active-poll-data';
+import { canManagePolls } from './machine-guards/can-manage-polls';
 
 const logger =  createUserPollsMachineLogger(
     'userPollsProvider'
@@ -39,7 +40,8 @@ export const UserPollsProvider: React.FC<PropsWithChildren> = ({ children }) => 
       getPollsSnapshot
      },
     guards: { 
-      isExternalInfoLoaded
+      isExternalInfoLoaded,
+      canManagePolls
     },
   });
 
