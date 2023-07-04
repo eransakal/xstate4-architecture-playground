@@ -5,7 +5,7 @@ import { PollIcon } from './poll-icon';
 import { pollsMetadata, PollMetadata } from './polls-metadata';
 import { useUserPollsUpdates } from '../../data/user-polls-machine';
 import {
-  getIsAnswerPollInProgress,
+  getIsAnsweringPollInProgress,
   getPollType,
 } from '../../data/user-polls-machine';
 
@@ -14,7 +14,7 @@ export const SelectAnswerView: React.FC<{}> = () => {
   const { actions } = useUserPollsService();
   const { pollType, isBusy } = useUserPollsUpdates({
     pollType: getPollType,
-    isBusy: getIsAnswerPollInProgress,
+    isBusy: getIsAnsweringPollInProgress,
   });
 
   useEffect(() => {

@@ -44,7 +44,7 @@ export const loadingState: UserPollsMachineStateConfig = {
               id: 'loadPollsData',
               src: 'getPollsSnapshot',
               onDone: {
-                actions: ['setActiveExampleData'],
+                actions: ['updateActivePollData'],
                 target: 'done',
               },
               onError: {

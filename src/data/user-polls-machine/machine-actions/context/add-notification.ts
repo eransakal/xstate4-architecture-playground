@@ -33,6 +33,6 @@ export const addNotification = assign<
       },
     });
 
-    context.notifications = [...context.notifications, notification];
+    context.notifications.push(notification);
   }
 });

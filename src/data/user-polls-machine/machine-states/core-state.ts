@@ -6,6 +6,7 @@ import { operationalState } from './core-states/operational-state';
 
 export const coreState: UserPollsMachineStateConfig = {
   initial: 'loading',
+  id: 'core',
   states: {
     loading: loadingState,
     operational: operationalState

@@ -1,5 +1,11 @@
 import { UserPollsMachineContext, UserPollsMachineEventsTypes , UserPollsMachineStateConfig } from '../../../../../types';
 import { actions } from 'xstate';
+import { createUserPollsMachineLogger } from '../../../../../utils/logger';
+
+
+const logger =  createUserPollsMachineLogger(
+  'startPollState'
+);
 
 export const startPollState: UserPollsMachineStateConfig = {
   initial: 'idle',
@@ -20,7 +26,15 @@ export const startPollState: UserPollsMachineStateConfig = {
         onDone: {
           target: 'idle',
         },
-        onError: {        
+        onError: {       
+          actions: (context, event) => {
+            logger.error(
+              {
+                message: `An error occurred while sending server request 'startPoll'.`,
+                data: event
+              }
+            );
+          },
           target: 'error',
         },
       },

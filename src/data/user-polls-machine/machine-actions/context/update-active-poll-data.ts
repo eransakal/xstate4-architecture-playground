@@ -17,7 +17,7 @@ export const updateActivePollData = assign(
       context.pollType = event.pollType;
       context.pollCreator = event.pollCreator;
       context.isPrivate = event.isPrivate;
-    } else if (event.type === `done.invoke.loadUserPollsData`) {
+    } else if (event.type === `done.invoke.loadPollsData`) {
       if (event.data?.pollType) {
         logger.log(
           {

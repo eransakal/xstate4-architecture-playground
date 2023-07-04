@@ -13,11 +13,12 @@ export enum UserPollsMachineEventsTypes {
   PollStarted = "PollStarted",
   PollAnswered = "PollAnswered",  
   EndPoll = "EndPoll",
+  CanManagePollsChanged = "CanManagePollsChanged"
 }
 
 // TODO add reference to example
  type invokeEvents = {
-  type: 'done.invoke.loadUserPollsData';
+  type: 'done.invoke.loadPollsData';
   data: null | {
     isPrivate: boolean;
     pollType: string;
@@ -76,6 +77,11 @@ type StartPollEvent = {
   isPrivate: boolean;
 }
 
+type CanManagePollsChangedEvent = {
+  type: UserPollsMachineEventsTypes.CanManagePollsChanged;
+  canManagePolls: boolean;
+}
+
 export type UserPollsMachineEvents = 
   | invokeEvents
   | AddNotificationsEvent 
@@ -87,10 +93,11 @@ export type UserPollsMachineEvents =
   | PollStartedEvent
   | PollAnsweredEvent
   | StartPollEvent  
+  | CanManagePollsChangedEvent
   | {     
     type: UserPollsMachineEventsTypes.RetryLoadExampleData
     | UserPollsMachineEventsTypes.PollEnded
-    | UserPollsMachineEventsTypes.EndPoll    
+    | UserPollsMachineEventsTypes.EndPoll      
   }
     
 

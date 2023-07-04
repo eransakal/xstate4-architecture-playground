@@ -1,3 +1,4 @@
+import { endPollState } from "./active-states/end-poll-state";
 import { answerPollState } from "./active-states/answer-poll-state";
 import {
   UserPollsMachineEventsTypes,
@@ -6,6 +7,7 @@ import {
 
 export const activeState: UserPollsMachineStateConfig = {
   type: "parallel",
+  exit: ['clearActivePollData'],
   on: {
     [UserPollsMachineEventsTypes.PollEnded]: {      
       target: 'inactive'
@@ -18,6 +20,7 @@ export const activeState: UserPollsMachineStateConfig = {
     ],
   },
   states: {
-    answerPoll: answerPollState
+    answerPoll: answerPollState,
+    endPoll: endPollState
   }
 };

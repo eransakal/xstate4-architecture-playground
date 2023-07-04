@@ -26,7 +26,7 @@ import { updateIntermediateUserAnswer } from './machine-actions/context/update-i
 import { startPoll } from './machine-services/start-poll';
 import { sendAnswer } from './machine-services/send-answer';
 import { onUserPollstatusUpdated } from './machine-services/on-poll-status-updated';
-import { stopPoll } from './machine-services/stop-poll';
+import { endPoll } from './machine-services/end-poll';
 
 const logger =  createUserPollsMachineLogger(
     'userPollsProvider'
@@ -57,7 +57,7 @@ export const UserPollsProvider: React.FC<PropsWithChildren> = ({ children }) => 
       onExternalInfoUpdated,
       getPollsSnapshot,
       startPoll,
-      stopPoll,
+      endPoll,
       sendAnswer,
       onUserPollstatusUpdated
      },
@@ -81,6 +81,17 @@ export const UserPollsProvider: React.FC<PropsWithChildren> = ({ children }) => 
           return {
             type: UserPollsMachineEventsTypes.ExternalInfoLoaded,
             loaded: value
+          }
+        }
+      }
+      />
+        <MachineCalculatedValueEmitter
+      formula={canManagePolls}
+      event={
+        (value) => {
+          return {
+            type: UserPollsMachineEventsTypes.CanManagePollsChanged,
+            canManagePolls: value
           }
         }
       }

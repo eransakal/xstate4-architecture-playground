@@ -5,9 +5,9 @@ import {
   UserPollsMachineEventsTypes,
 } from '../types';
 
-export const stopPoll =
+export const endPoll =
   (context: UserPollsMachineContext, event: UserPollsMachineEvents) => () => {    
-    return axios.put(
+    return axios.post(
       '/polls/end',
       {},
       {

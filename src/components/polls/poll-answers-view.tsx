@@ -13,7 +13,7 @@ import { PollIcon } from './poll-icon';
 import { pollsMetadata, PollMetadata } from './polls-metadata';
 import {
   getIsPollPrivate,
-  getIsStopPollInProgress,
+  getIsEndingPollInProgress,
   getPollType,
   getPollAnswers,
 } from '../../data/user-polls-machine';
@@ -39,7 +39,7 @@ export const PollAnswersView: React.FC<{}> = () => {
     pollType: getPollType,
     pollIsPrivate: getIsPollPrivate,
     pollAnswers: getPollAnswers,
-    isBusy: getIsStopPollInProgress,
+    isBusy: getIsEndingPollInProgress,
   });
 
   const { answerdTotal, items } = useMemo(() => {

@@ -2,7 +2,7 @@
   "globals": {},
   "machines": {
     "user-polls": {
-      "path": "/Users/eransakal/dev/github/eransakal/xstate4-architecture-showcase/src/user-polls-machine",
+      "path": "/Users/eransakal/dev/github/eransakal/xstate4-architecture-showcase/src/data/user-polls-machine",
       "context": {
         "hasNotificationsState": true
       },
