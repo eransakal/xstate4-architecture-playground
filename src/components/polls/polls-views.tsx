@@ -1,19 +1,19 @@
 import React from 'react';
 import { CreatePollsView } from './create-polls-view';
-import { PollVotesView } from './poll-votes-view';
+import { PollAnswersView } from './poll-answers-view';
 import { Box } from '@chakra-ui/react';
 import { SelectAnswerView } from './select-answer-view';
 import {
   getIsPollActive,
   getUserAnsweredPoll,
-  getCanSeePollVotes,
+  getCanSeePollAnswers,
   getCanCreatePolls,
   getIsLoadingPollData,
-} from '../../data/polls-machine/machine-selectors';
+} from '../../data/user-polls-machine';
 import { InactiveView } from './inactive-view';
 import { PollAnsweredView } from './poll-answered-view';
 import { LoadingPollView } from './loading-poll-view';
-import { usePollsUpdates } from '../../data/polls-machine';
+import { useUserPollsUpdates } from '../../data/user-polls-machine';
 
 export const PollsViews: React.FC<{}> = () => {
   const {
@@ -22,20 +22,20 @@ export const PollsViews: React.FC<{}> = () => {
     isPollActive,
     canCreatePolls,
     canSeePollsResults,
-  } = usePollsUpdates({
+  } = useUserPollsUpdates({
     userAnsweredPoll: getUserAnsweredPoll,
     isLoadingPollData: getIsLoadingPollData,
     isPollActive: getIsPollActive,
     canCreatePolls: getCanCreatePolls,
-    canSeePollsResults: getCanSeePollVotes,
+    canSeePollsResults: getCanSeePollAnswers,
   });
 
   const showCreatePolls = canCreatePolls;
   const showPollInactiveView = !isPollActive && !showCreatePolls;
-  const showPollVotes = userAnsweredPoll && canSeePollsResults;
+  const showPollAnswers = userAnsweredPoll && canSeePollsResults;
   const showSelectAnswerView = isPollActive && !userAnsweredPoll;
   const showPollAnswered = userAnsweredPoll && !canSeePollsResults;
-
+  
   return (
     <Box position="relative" h={'100%'} p={2}>
       {isLoadingPollData ? (
@@ -44,7 +44,7 @@ export const PollsViews: React.FC<{}> = () => {
         <>
           {showCreatePolls && <CreatePollsView />}
           {showPollInactiveView && <InactiveView />}
-          {showPollVotes && <PollVotesView />}
+          {showPollAnswers && <PollAnswersView />}
           {showPollAnswered && <PollAnsweredView />}
           {showSelectAnswerView && <SelectAnswerView />}
         </>

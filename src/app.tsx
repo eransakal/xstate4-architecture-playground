@@ -1,8 +1,8 @@
 import { Center, Text } from '@chakra-ui/react';
 import React, { PropsWithChildren, useMemo } from 'react';
 import { AppContainer } from './components/app-container';
-import { PollsProvider } from './data/polls-machine/polls-provider';
 import { UsersProvider } from './data/users-machine/users-provider';
+import { UserPollsProvider } from './data/user-polls-machine';
 
 export const AppContext = React.createContext<{
   appInstance: string;
@@ -49,10 +49,10 @@ export const App: React.FC<{
   return (
     <AppContext.Provider value={providerValue}>
       <UsersProvider>
-        <DelayedContent>
-          <PollsProvider>
-            <AppContainer />
-          </PollsProvider>
+        <DelayedContent>      
+            <UserPollsProvider>
+              <AppContainer />
+            </UserPollsProvider>        
         </DelayedContent>
       </UsersProvider>
     </AppContext.Provider>

@@ -28,7 +28,7 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
     "xstate": "^4.37.0",
-    "xstate-hive": "^1.0.1"
+    "xstate-hive": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

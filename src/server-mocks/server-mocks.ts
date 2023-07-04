@@ -166,7 +166,7 @@ export const serverMocks = {
     });
 
     mock.onGet('/polls/status').reply((config) => {
-      console.log(`[mock] got request 'polls/answer'`, config.data);
+      console.log(`[mock] got request 'polls/status'`, config.data);
 
       const userOrFailure = getRequestUserFromHeader(config, false);
 
@@ -193,7 +193,7 @@ export const serverMocks = {
             pollCreator: activePollData.pollCreator,
             pollType: activePollData.pollType,
             isPrivate: activePollData.isPrivate,
-            answers: userOrFailure.isAdmin ? activePollData.answers : [],
+            answers: userOrFailure.isAdmin ? activePollData.answers : activePollData.answers.filter((answer) => answer.userId === userOrFailure.id),
           },
         ];
       }
