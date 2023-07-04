@@ -7,7 +7,7 @@ import {
 
 export const sendAnswer =
   (context: UserPollsMachineContext, event: UserPollsMachineEvents) => () => {
-    if (context.intermediateUserVote) {
+    if (!context.intermediateUserAnswer) {
       return Promise.reject();
     }
 
@@ -15,7 +15,7 @@ export const sendAnswer =
       '/polls/answer',
       {
         userId: context.externalInfo.userId,
-        answerId: context.intermediateUserVote,
+        answerId: context.intermediateUserAnswer,
       },
       {
         headers: {

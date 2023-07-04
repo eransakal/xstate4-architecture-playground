@@ -6,13 +6,13 @@ export enum UserPollsMachineEventsTypes {
   ExternalInfoLoaded = 'ExternalInfoLoaded',
   AddNotification = 'AddNotification',
   RemoveNotification = 'RemoveNotification',
-  UpdateUserVote = "UpdateUserVote",
-  UserVoteUpdated = "UserVoteUpdated",
+  UpdateUserAnswer = "UpdateUserAnswer",  
   StartPoll = "StartPoll",
   RetryLoadExampleData = "RetryLoadExampleData",
   PollEnded = "PollEnded",
   PollStarted = "PollStarted",
-  PollAnswered = "PollAnswered",
+  PollAnswered = "PollAnswered",  
+  EndPoll = "EndPoll",
 }
 
 // TODO add reference to example
@@ -50,9 +50,9 @@ type ExternalInfoUpdatedEvent = {
   externalInfo: Partial<UserPollsMachineContext['externalInfo']>;
 };
 
-type UpdateUserVoteEvent = {
-  type: UserPollsMachineEventsTypes.UpdateUserVote;
-  userVote: string;
+type UpdateUserAnswerEvent = {
+  type: UserPollsMachineEventsTypes.UpdateUserAnswer;
+  answerId: string;
 };
 
 type PollStartedEvent = {
@@ -83,14 +83,14 @@ export type UserPollsMachineEvents =
   | ExternalInfoLoadedEvent
   | ExternalInfoUpdatedEvent
   | ExternalInfoUpdatedEvent
-  | UpdateUserVoteEvent
+  | UpdateUserAnswerEvent
   | PollStartedEvent
   | PollAnsweredEvent
-  | StartPollEvent
-  | { 
-    type: UserPollsMachineEventsTypes.UserVoteUpdated  
-    | UserPollsMachineEventsTypes.RetryLoadExampleData
+  | StartPollEvent  
+  | {     
+    type: UserPollsMachineEventsTypes.RetryLoadExampleData
     | UserPollsMachineEventsTypes.PollEnded
+    | UserPollsMachineEventsTypes.EndPoll    
   }
     
 

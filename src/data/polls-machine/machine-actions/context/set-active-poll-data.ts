@@ -23,16 +23,16 @@ export const setActivePollData = assign(
         context.isPrivate = event.data.isPrivate;
         context.pollType = event.data.pollType;
         context.pollCreator = event.data.pollCreator;
-        context.userVoted =
+        context.userAnswerd =
           !!event.data.answers.find((answer) => {
             return answer.userId === context.externalInfo.userId;
           })?.answerId ?? null;
-        context.pollVotes = event.data.answers;
+        context.pollAnswers = event.data.answers;
       } else {
         logger.log(`has no active poll in progress`);
         context.pollType = null;
-        context.userVoted = null;
-        context.pollVotes = [];
+        context.userAnswerd = null;
+        context.pollAnswers = [];
       }
     }
   }

@@ -15,8 +15,8 @@ export const clearActivePollData = assign(
         message: `clear active poll data`
       });
       context.pollType = null;
-      context.pollVotes = null;
-      context.userVote = '';
+      context.pollAnswers = null;
+      context.userAnswer = '';
     }
   }
 );

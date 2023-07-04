@@ -6,6 +6,9 @@ import { activeState } from './polls-states/active-state';
 
 export const pollsState: UserPollsMachineStateConfig = {
   initial: 'unknown',
+  invoke: {
+    src: 'onUserPollstatusUpdated'
+  },
   states: {
     unknown: {
       always: [

@@ -13,8 +13,8 @@ export const clearActivePollData = assign(
     if (event.type === PollsMachineEventsTypes.PollEnded) {
       logger.log(`clear active poll data`);
       context.pollType = null;
-      context.pollVotes = null;
-      context.userVoted = false;
+      context.pollAnswers = null;
+      context.userAnswerd = false;
     }
   }
 );

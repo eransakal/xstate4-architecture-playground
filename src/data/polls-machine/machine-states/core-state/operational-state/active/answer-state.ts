@@ -33,11 +33,11 @@ export const answerPollState: PollsMachineStateConfig = {
           {
             cond: (context, event) =>
               context.externalInfo.userId === event.userId,
-            actions: ['setUserVote'],
+            actions: ['setUserAnswer'],
             target: 'done',
           },
           {
-            actions: ['setUserVote'],
+            actions: ['setUserAnswer'],
           },
         ],
       },

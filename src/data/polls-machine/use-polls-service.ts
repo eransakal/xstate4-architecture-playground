@@ -2,7 +2,7 @@ import { useContext, useMemo } from 'react';
 import { PollsMachineEventsTypes } from './types';
 import { PollsContext } from './utils/polls-context';
 
-export const usePollsService = () => {
+export const useUserPollsService = () => {
   const { pollsMachineService } = useContext(PollsContext);
 
   const actions = useMemo(() => {

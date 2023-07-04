@@ -8,15 +8,15 @@ import {
   AvatarGroup,
 } from '@chakra-ui/react';
 import React, { useEffect, useMemo, useState } from 'react';
-import { usePollsService } from '../../data/polls-machine/use-polls-service';
+import { useUserPollsService } from '../../data/user-polls-machine';
 import { PollIcon } from './poll-icon';
 import { pollsMetadata, PollMetadata } from './polls-metadata';
 import {
   getIsPollPrivate,
   getIsStopPollInProgress,
   getPollType,
-  getPollVotes,
-} from '../../data/polls-machine/machine-selectors';
+  getPollAnswers,
+} from '../../data/user-polls-machine';
 import { UserAvatar } from '../users/user-avatar';
 import {
   getOwnUser,
@@ -24,57 +24,57 @@ import {
   getIsAdmin,
 } from '../../data/users-machine/machine-selectors';
 import { useUsersUpdates } from '../../data/users-machine';
-import { usePollsUpdates } from '../../data/polls-machine';
+import { useUserPollsUpdates } from '../../data/user-polls-machine';
 
-export const PollVotesView: React.FC<{}> = () => {
+export const PollAnswersView: React.FC<{}> = () => {
   const [pollMetadata, setPollMetadata] = useState<PollMetadata | null>(null);
 
-  const { actions } = usePollsService();
+  const { actions } = useUserPollsService();
   const { ownUser, users, isAdmin } = useUsersUpdates({
     ownUser: getOwnUser,
     users: getUsers,
     isAdmin: getIsAdmin,
   });
-  const { pollType, pollIsPrivate, pollVotes, isBusy } = usePollsUpdates({
+  const { pollType, pollIsPrivate, pollAnswers, isBusy } = useUserPollsUpdates({
     pollType: getPollType,
     pollIsPrivate: getIsPollPrivate,
-    pollVotes: getPollVotes,
+    pollAnswers: getPollAnswers,
     isBusy: getIsStopPollInProgress,
   });
 
-  const { votedTotal, items } = useMemo(() => {
-    const totalVotes = pollVotes?.length ?? 0;
-    const votedTotal =
-      pollVotes?.filter((vote) => {
+  const { answerdTotal, items } = useMemo(() => {
+    const totalAnswers = pollAnswers?.length ?? 0;
+    const answerdTotal =
+      pollAnswers?.filter((answer) => {
         return (
-          vote.userId === ownUser?.id ||
-          users?.find((user) => vote.userId === user.id)
+          answer.userId === ownUser?.id ||
+          users?.find((user) => answer.userId === user.id)
         );
       }).length ?? 0;
 
     const items =
       pollMetadata?.answers.map((answer) => {
         const answerUsers =
-          pollVotes
+          pollAnswers
             ?.filter((result) => result.answerId === answer.id)
-            .map((pollVote) => ({
-              id: pollVote.userId,
-              name: pollVote.userName,
-              avatar: pollVote.userAvatar,
-              isOnline: !!users.find((user) => user.id === pollVote.userId),
+            .map((pollAnswer) => ({
+              id: pollAnswer.userId,
+              name: pollAnswer.userName,
+              avatar: pollAnswer.userAvatar,
+              isOnline: !!users.find((user) => user.id === pollAnswer.userId),
             })) ?? [];
         return {
           ...answer,
           users: answerUsers,
-          percentage: answerUsers.length / totalVotes || 0,
+          percentage: answerUsers.length / totalAnswers || 0,
         };
       }) ?? [];
 
     return {
       items,
-      votedTotal,
+      answerdTotal,
     };
-  }, [pollMetadata?.answers, users, pollVotes, ownUser?.id]);
+  }, [pollMetadata?.answers, users, pollAnswers, ownUser?.id]);
 
   useEffect(() => {
     setPollMetadata(
@@ -109,7 +109,7 @@ export const PollVotesView: React.FC<{}> = () => {
             <Box flex={1}>
               {pollIsPrivate && <Text as={'b'}>Private Poll |&nbsp;</Text>}
               <Text as={'b'}>
-                &nbsp;{votedTotal}&nbsp;/&nbsp;{users.length} answered
+                &nbsp;{answerdTotal}&nbsp;/&nbsp;{users.length} answered
               </Text>
             </Box>
             {isAdmin && (

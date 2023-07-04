@@ -4,9 +4,10 @@ import { UserPollsMachineEventsTypes , UserPollsMachineStateConfig } from '../..
 export const answerPollState: UserPollsMachineStateConfig = {
   initial: 'idle',
   on: {
-    [UserPollsMachineEventsTypes.UserVoteUpdated]: [
+    [UserPollsMachineEventsTypes.PollAnswered]: [
       {
-        actions: ['updateUserVote', 'clearIntermediateUserVote'],
+        cond: (context, event) => context.externalInfo.userId === event.userId,
+        actions: ['updateAnswers', 'clearIntermediateUserAnswer'],
         target: '.idle',
       },
     ],
@@ -14,10 +15,10 @@ export const answerPollState: UserPollsMachineStateConfig = {
   states: {
     idle: {
       on: {
-        [UserPollsMachineEventsTypes.UpdateUserVote]: [
+        [UserPollsMachineEventsTypes.UpdateUserAnswer]: [
           {
             cond: 'canAnswerPoll',
-            actions: ['updateIntermediateUserVote'],
+            actions: ['updateIntermediateUserAnswer'],
             target: 'inProgress',
           },
         ],
@@ -25,21 +26,22 @@ export const answerPollState: UserPollsMachineStateConfig = {
     },
     inProgress: {
       invoke: {
-        src: 'updateUserVote',
+        src: 'sendAnswer',
         onDone: {
           target: 'pendingWebsocket',
         },
         onError: {
           actions: [
+            'clearIntermediateUserAnswer',        
             actions.send((context) => ({
               type: UserPollsMachineEventsTypes.AddNotification,
               payload: {
                 variant: 'error',
                 message: `answer-poll-failed`,
-                reason: `An error occurred while requesting an update for 'userVote' to '${context.userVote || ''}'. As a result, the intermediate value is being reverted.`
+                reason: `An error occurred while requesting an update for 'userAnswer' to '${context.userAnswer || ''}'. As a result, the intermediate value is being reverted.`
               },
             })),
-            'clearIntermediateUserVote',          
+              
           ],
           target: 'idle',
         },
@@ -54,10 +56,10 @@ export const answerPollState: UserPollsMachineStateConfig = {
               payload: {
                 variant: 'error',
                 message: `answer-poll-failed`,
-                reason: `The server failed to respond via the web socket when updating 'userVote' to '${context.userVote || ''}'. As a result, the intermediate value is being reverted.`
+                reason: `The server failed to respond via the web socket when updating 'userAnswer' to '${context.userAnswer || ''}'. As a result, the intermediate value is being reverted.`
               },
             })),
-            'clearIntermediateUserVote',
+            'clearIntermediateUserAnswer',
           ],
           target: 'idle',
         },

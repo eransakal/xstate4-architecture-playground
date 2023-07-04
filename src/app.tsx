@@ -1,7 +1,6 @@
 import { Center, Text } from '@chakra-ui/react';
 import React, { PropsWithChildren, useMemo } from 'react';
 import { AppContainer } from './components/app-container';
-import { PollsProvider } from './data/polls-machine/polls-provider';
 import { UsersProvider } from './data/users-machine/users-provider';
 import { UserPollsProvider } from './data/user-polls-machine';
 

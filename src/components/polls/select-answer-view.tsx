@@ -1,18 +1,18 @@
 import { VStack, Heading, Center, HStack, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { usePollsService } from '../../data/polls-machine/use-polls-service';
+import { useUserPollsService } from '../../data/user-polls-machine';
 import { PollIcon } from './poll-icon';
 import { pollsMetadata, PollMetadata } from './polls-metadata';
-import { usePollsUpdates } from '../../data/polls-machine';
+import { useUserPollsUpdates } from '../../data/user-polls-machine';
 import {
   getIsAnswerPollInProgress,
   getPollType,
-} from '../../data/polls-machine/machine-selectors';
+} from '../../data/user-polls-machine';
 
 export const SelectAnswerView: React.FC<{}> = () => {
   const [pollMetadata, setPollMetadata] = useState<PollMetadata | null>(null);
-  const { actions } = usePollsService();
-  const { pollType, isBusy } = usePollsUpdates({
+  const { actions } = useUserPollsService();
+  const { pollType, isBusy } = useUserPollsUpdates({
     pollType: getPollType,
     isBusy: getIsAnswerPollInProgress,
   });

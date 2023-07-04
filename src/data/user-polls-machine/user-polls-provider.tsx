@@ -18,11 +18,15 @@ import { AppContext } from '../../app';
 import { getPollsSnapshot } from './machine-services/get-polls-snapshot';
 import { canManagePolls } from './machine-guards/can-manage-polls';
 import { clearActivePollData } from './machine-actions/context/clear-active-poll-data';
-import { setActivePollData } from './machine-actions/context/set-active-poll-data';
-import { updateUserVote } from './machine-actions/context/update-user-vote';
-import { clearIntermediateUserVote } from './machine-actions/context/clear-intermediate-user-vote';
+import { updateActivePollData } from './machine-actions/context/update-active-poll-data';
+import { updateAnswers } from './machine-actions/context/update-answers';
+import { clearIntermediateUserAnswer } from './machine-actions/context/clear-intermediate-user-answer';
 import { canAnswerPoll } from './machine-guards/can-answer-poll';
-import { updateIntermediateUserVote } from './machine-actions/context/update-intermediate-user-vote';
+import { updateIntermediateUserAnswer } from './machine-actions/context/update-intermediate-user-answer';
+import { startPoll } from './machine-services/start-poll';
+import { sendAnswer } from './machine-services/send-answer';
+import { onUserPollstatusUpdated } from './machine-services/on-poll-status-updated';
+import { stopPoll } from './machine-services/stop-poll';
 
 const logger =  createUserPollsMachineLogger(
     'userPollsProvider'
@@ -44,14 +48,18 @@ export const UserPollsProvider: React.FC<PropsWithChildren> = ({ children }) => 
       addNotification,
       removeNotification,
       clearActivePollData,
-      clearIntermediateUserVote,
-      updateIntermediateUserVote,
-      setActivePollData,
-      updateUserVote
+      clearIntermediateUserAnswer,      
+      updateIntermediateUserAnswer,
+      updateActivePollData,
+      updateAnswers
     },
     services: {
       onExternalInfoUpdated,
-      getPollsSnapshot
+      getPollsSnapshot,
+      startPoll,
+      stopPoll,
+      sendAnswer,
+      onUserPollstatusUpdated
      },
     guards: {
       isExternalInfoLoaded,

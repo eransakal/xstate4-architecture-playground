@@ -14,7 +14,7 @@ export const activeState: PollsMachineStateConfig = {
     },
     [PollsMachineEventsTypes.PollAnswered]: {
       cond: (context, event) => context.externalInfo.userId !== event.userId,
-      actions: ['setUserVote'],
+      actions: ['setUserAnswer'],
     },
   },
   states: {

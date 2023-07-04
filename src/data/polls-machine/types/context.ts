@@ -9,8 +9,8 @@ export interface PollsMachineContext {
   isPrivate: boolean;
   pollCreator: number | null;
   pollType: null | string;
-  userVoted: boolean | null;
-  pollVotes:
+  userAnswerd: boolean | null;
+  pollAnswers:
     | {
         userId: number;
         userName: string;

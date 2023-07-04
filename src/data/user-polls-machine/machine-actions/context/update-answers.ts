@@ -6,24 +6,24 @@ import {
   UserPollsMachineEventsTypes,
 } from '../../types';
 
-const logger = createUserPollsMachineLogger('setUserVote');
+const logger = createUserPollsMachineLogger('updateAnswers');
 
-export const updateUserVote = assign(
+export const updateAnswers = assign(
   (context: UserPollsMachineContext, event: UserPollsMachineEvents) => {
     if (event.type === UserPollsMachineEventsTypes.PollAnswered) {
       logger.log({
-        message: `store user vote`
+        message: `store user answer`
       });
 
       if (context.externalInfo.userId === event.userId) {
-        context.userVote = event.answerId;
+        context.userAnswer = event.answerId;
       }
 
-      context.pollVotes =
-        context.pollVotes?.filter((result) => result.userId !== event.userId) ??
+      context.pollAnswers =
+        context.pollAnswers?.filter((result) => result.userId !== event.userId) ??
         [];
 
-      context.pollVotes.push({
+      context.pollAnswers.push({
         userId: event.userId,
         userName: event.userName,
         userAvatar: event.userAvatar,

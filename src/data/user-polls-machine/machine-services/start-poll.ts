@@ -5,8 +5,8 @@ import {
   UserPollsMachineEventsTypes,
 } from '../types';
 
-export const startAPoll =
-  (context: UserPollsMachineContext, event: UserPollsMachineEvents) => () => {
+export const startPoll =
+  (context: UserPollsMachineContext, event: UserPollsMachineEvents) => () => {    
     if (event.type !== UserPollsMachineEventsTypes.StartPoll) {
       return;
     }

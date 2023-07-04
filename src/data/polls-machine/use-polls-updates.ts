@@ -13,7 +13,7 @@ type PollsSelectors<
   ? ReturnType<T>
   : unknown;
 
-export const usePollsUpdates = <
+export const useUserPollsUpdates = <
   T extends
     | Record<string, (state: PollsMachineState) => any>
     | ((state: PollsMachineState) => any)

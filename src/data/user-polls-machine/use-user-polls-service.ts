@@ -13,6 +13,24 @@ export const useUserPollsService = () => {
           id,
         });
       },
+      startAPoll: (pollType: string, isPrivate: boolean) => {
+        userPollsMachineService.send({
+          type: UserPollsMachineEventsTypes.StartPoll,
+          pollType,
+          isPrivate,
+        });
+      },
+      endPoll: () => {
+        userPollsMachineService.send({
+          type: UserPollsMachineEventsTypes.EndPoll,
+        });
+      },
+      answerPoll: (answerId: string) => {
+        userPollsMachineService.send({
+          type: UserPollsMachineEventsTypes.UpdateUserAnswer,
+          answerId,
+        });
+      },
     };
   }, [userPollsMachineService]);
 

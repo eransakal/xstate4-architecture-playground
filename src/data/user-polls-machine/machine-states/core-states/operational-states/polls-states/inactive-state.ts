@@ -6,7 +6,12 @@ import {
 
 export const inactiveState: UserPollsMachineStateConfig = {
   type: "parallel",
-
+  on: {
+    [UserPollsMachineEventsTypes.PollStarted]: {
+      actions: ['updateActivePollData'],
+      target: 'active'
+    }
+  },
   states: {
     startPoll: startPollState
   }

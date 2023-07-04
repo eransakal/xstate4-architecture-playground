@@ -10,11 +10,11 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Select, { components, ControlProps } from 'react-select';
-import { usePollsService } from '../../data/polls-machine/use-polls-service';
+import { useUserPollsService } from '../../data/user-polls-machine';
 import { PollIcon } from './poll-icon';
 import { pollsMetadata } from './polls-metadata';
-import { usePollsUpdates } from '../../data/polls-machine';
-import { getIsStartPollInProgress } from '../../data/polls-machine/machine-selectors';
+import { getIsStartPollInProgress } from '../../data/user-polls-machine';
+import { useUserPollsUpdates } from '../../data/user-polls-machine';
 
 const Control = ({ children, ...props }: ControlProps<any, false>) => {
   return (
@@ -49,9 +49,9 @@ const Option = ({
   ) : null;
 
 export const CreatePollsView: React.FC<{}> = () => {
-  const { actions } = usePollsService();
+  const { actions } = useUserPollsService();
 
-  const isBusy = usePollsUpdates(getIsStartPollInProgress);
+  const isBusy = useUserPollsUpdates(getIsStartPollInProgress);
   const [pollMetadata, setPollMetadata] = useState(pollsMetadata[0]);
   const [isPrivate, setIsPrivate] = useState(true);
 

@@ -6,16 +6,16 @@ import {
   UserPollsMachineEventsTypes,
 } from '../../types';
 
-const logger = createUserPollsMachineLogger('updateUserVoteIntermediate');
+const logger = createUserPollsMachineLogger('updateUserAnswerIntermediate');
 
-export const updateIntermediateUserVote = assign(
+export const updateIntermediateUserAnswer = assign(
   (context: UserPollsMachineContext, event: UserPollsMachineEvents) => {
-    if (event.type === UserPollsMachineEventsTypes.UpdateUserVote) {
+    if (event.type === UserPollsMachineEventsTypes.UpdateUserAnswer) {
       logger.log({
-        message: `update user vote intermediate value '${event.userVote}'`
+        message: `update user answer intermediate value '${event.answerId}'`
       });
 
-      context.intermediateUserVote = event.userVote;
+      context.intermediateUserAnswer = event.answerId;
       
     }
   }

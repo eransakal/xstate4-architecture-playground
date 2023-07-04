@@ -8,7 +8,7 @@ import {
   clearActivePollData,
   requestEndPoll,
   setActivePollData,
-  setUserVote,
+  setUserAnswer,
   updateExternalInfo,
 } from './machine-actions';
 import {
@@ -40,7 +40,7 @@ export const PollsProvider: React.FC<PropsWithChildren> = ({ children }) => {
       setActivePollData,
 
       updateExternalInfo,
-      setUserVote,
+      setUserAnswer,
     },
     services: {
       startAPoll,

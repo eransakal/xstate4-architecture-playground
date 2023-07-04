@@ -6,16 +6,16 @@ import {
   UserPollsMachineEventsTypes,
 } from '../../types';
 
-const logger = createUserPollsMachineLogger('setUserVote');
+const logger = createUserPollsMachineLogger('setUserAnswer');
 
-export const clearIntermediateUserVote = assign(
+export const clearIntermediateUserAnswer = assign(
   (context: UserPollsMachineContext, event: UserPollsMachineEvents) => {
     
       logger.log({
-        message: `clear intermediate user vote`
+        message: `clear intermediate user answer`
       });
 
-      context.intermediateUserVote = '';
+      context.intermediateUserAnswer = '';
     
   }
 );

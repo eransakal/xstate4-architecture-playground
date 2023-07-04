@@ -8,9 +8,16 @@ import {
 
 const logger = createUserPollsMachineLogger('setActivePollData');
 
-export const setActivePollData = assign(
+export const updateActivePollData = assign(
   (context: UserPollsMachineContext, event: UserPollsMachineEvents) => {
-     if (event.type === `done.invoke.loadUserPollsData`) {
+    if (event.type === UserPollsMachineEventsTypes.PollStarted) {
+      logger.log({
+        message: `update active poll data`
+      });
+      context.pollType = event.pollType;
+      context.pollCreator = event.pollCreator;
+      context.isPrivate = event.isPrivate;
+    } else if (event.type === `done.invoke.loadUserPollsData`) {
       if (event.data?.pollType) {
         logger.log(
           {
@@ -20,18 +27,18 @@ export const setActivePollData = assign(
         context.isPrivate = event.data.isPrivate;
         context.pollType = event.data.pollType;
         context.pollCreator = event.data.pollCreator;
-        context.userVote =
+        context.userAnswer =
           event.data.answers.find((answer) => {
             return answer.userId === context.externalInfo.userId;
           })?.answerId || '';
-        context.pollVotes = event.data.answers;
+        context.pollAnswers = event.data.answers;
       } else {
         logger.log({
           message: `has no active poll in progress`
         });
         context.pollType = null;
 
-        context.pollVotes = [];
+        context.pollAnswers = [];
       }
     }
   }
