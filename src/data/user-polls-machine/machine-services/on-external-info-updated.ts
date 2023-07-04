@@ -1,8 +1,8 @@
 import { User, onOwnUserChangedEvent } from '../../users-machine';
 import {
   UserPollsMachineContext,
+  UserPollsMachineEventsTypes,
   UserPollsMachineSender,
-  UserPollsMachineEventsTypes
 } from '../types';
 
 import { createUserPollsMachineLogger } from '../utils/logger';
@@ -17,7 +17,9 @@ export const onExternalInfoUpdated =
     const handleOwnUserChanged = (ownUser: User | null) => {
   
       if (ownUser) {
-        logger.log(`updating external info for user '${ownUser.id}'`)
+        logger.log({
+          message: `updating external info for user '${ownUser.id}'`
+        })
         send({
           type: UserPollsMachineEventsTypes.ExternalInfoUpdated,
           externalInfo: {

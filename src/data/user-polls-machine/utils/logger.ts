@@ -1,14 +1,27 @@
 import { UserPollsMachineId } from '../types';
+
 export const createUserPollsMachineLogger = (
   sender: string
 ) => ({
-  log: (message: string, ...optionalParams: any[]) =>{
-    console.log(`[${ UserPollsMachineId }:${sender}] ${message}`, ...optionalParams)
+  log: ({ message, data }: { message: string, data?: Record<string, any>}) =>{
+    if (data) {
+      console.log(`[${ UserPollsMachineId }:${sender}] ${message}`, data)
+      return
+    }
+    console.log(`[${ UserPollsMachineId }:${sender}] ${message}`)
   },
-  warn: (message: string, ...optionalParams: any[]) =>{
-    console.warn(`[${ UserPollsMachineId }:${sender}] ${message}`, ...optionalParams)
+  warn: ({ message, data }: { message: string, data?: Record<string, any>}) =>{
+    if (data) {
+      console.warn(`[${ UserPollsMachineId }:${sender}] ${message}`, data)
+      return
+    }
+    console.warn(`[${ UserPollsMachineId }:${sender}] ${message}`)
   },
-  error: (message: string, ...optionalParams: any[]) =>{
-    console.error(`[${ UserPollsMachineId }:${sender}] ${message}`, ...optionalParams)
+  error: ({ message, data }: { message: string, data?: Record<string, any>}) =>{
+    if (data) {
+      console.error(`[${ UserPollsMachineId }:${sender}] ${message}`, data)
+      return
+    }
+    console.error(`[${ UserPollsMachineId }:${sender}] ${message}`)
   }
 })

@@ -4,9 +4,10 @@ import {
 } from '../../types';
 
 export const operationalState: UserPollsMachineStateConfig = {
+  type: "parallel",
   on: {},
-  type: 'parallel',
+
   states: {
     polls: pollsState
-  },
+  }
 };

@@ -32,8 +32,9 @@ export function MachineCalculatedValueEmitter<T>(props: Props<T>) {
     if (eventRef.current) {
       const event = eventRef.current(value)
       if (event) {
-        logger.log(`emitting calculated value changed event '${event.type}'`);
-        console.log(event)
+        logger.log({
+          message: `emitting calculated value changed event '${event.type}'`
+        });      
         userPollsMachineService.send(event)
       }
     }

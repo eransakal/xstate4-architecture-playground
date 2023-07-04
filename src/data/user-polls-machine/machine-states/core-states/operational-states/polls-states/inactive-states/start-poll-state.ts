@@ -8,7 +8,7 @@ export const startPollState: UserPollsMachineStateConfig = {
       on: {
         [UserPollsMachineEventsTypes.StartPoll]: [
           {
-            cond: 'canManagePolls',        
+            cond: 'canManagePolls',
             target: 'inProgress',
           },
         ],     
@@ -26,24 +26,24 @@ export const startPollState: UserPollsMachineStateConfig = {
       },
     },
     error: {
+      entry: [
+        actions.send((context: UserPollsMachineContext) => ({
+          type: UserPollsMachineEventsTypes.AddNotification,
+          payload: {
+            variant: 'error',
+            message: `start-poll-failed`,
+            reason: `An error occurred while sending server request 'startPoll'.`
+          },
+        })),            
+      ],
       on: {
         [UserPollsMachineEventsTypes.StartPoll]: [
           {
-            cond: 'canManagePolls',        
+            cond: 'canManagePolls',
             target: 'inProgress',
           },
         ],     
       },
-      entry: [
-        actions.send((context: UserPollsMachineContext) => ({
-          type: UserPollsMachineEventsTypes.ShowNotification,
-          payload: {
-            variant: 'error',
-            message: `pollReverted`,
-            reason: `An error occurred while requesting an update for 'poll' to '${context.pollType || ''}'.`
-          },
-        })),            
-      ],
     }
   },
 };

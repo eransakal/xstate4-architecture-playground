@@ -8,30 +8,10 @@ export const loadingState: UserPollsMachineStateConfig = {
     }    
   ],   
   states: {    
-    loadPollData: {
-      initial: 'loading',
-      states: {
-        loading: {
-          invoke: [
-            {
-              id: 'loadPollsData',
-              src: 'getPollsSnapshot',
-              onDone: {
-                actions: ['setActivePollData'],
-                target: 'done',
-              },
-            },
-          ],
-        },
-        done: {
-          type: 'final',
-        },
-      },
-    },
     externalInfo: {
       initial: 'unknown',               
       states: {
-        'unknown': {
+        unknown: {
           always: [
             {
               cond: 'isExternalInfoLoaded',
@@ -55,7 +35,7 @@ export const loadingState: UserPollsMachineStateConfig = {
         },
       },
     },
-    /*loadExampleData: {
+    loadExampleData: {
       initial: 'loading',
       states: {
         loading: {
@@ -84,7 +64,7 @@ export const loadingState: UserPollsMachineStateConfig = {
           },
         }
       },
-    },*/
+    },
   }  
 };
 

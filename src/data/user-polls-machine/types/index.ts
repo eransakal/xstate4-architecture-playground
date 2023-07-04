@@ -5,6 +5,7 @@ import { UserPollsMachineEvents } from './events';
 
 export * from './events';
 export * from './context';
+export * from './notifications';
 
 export const UserPollsMachineId = 'userPolls';
 

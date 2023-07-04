@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useSelector } from '@xstate/react';
 import { UserPollsMachineState } from './types';
 import { UserPollsContext } from './utils/user-polls-context';
@@ -21,25 +21,28 @@ export const useUserPollsUpdates = <
 >(
   selectors: T
 ): UserPollsSelectors<T> => {  
-  const { userPollsMachineService } = useContext(UserPollsContext);
+  const { userPollsMachineService: machineService } = useContext(UserPollsContext);
 
-  let selector: (state: UserPollsMachineState) => any = () => {};
+  const getSelectorFn: () => ((state: UserPollsMachineState) => any) = ()  => {
+    if (typeof selectors === 'function') {
+      return selectors;
+    } else if (typeof selectors === 'object') {
+      return (state: UserPollsMachineState) => {
+        const result: Partial<UserPollsSelectors<T>> = {};
 
-  if (typeof selectors === 'function') {
-    selector = selectors;
-  } else if (typeof selectors === 'object') {
-    selector = (state: UserPollsMachineState) => {
-      const result: Partial<UserPollsSelectors<T>> = {};
-
-      for (const key in selectors) {
-        if (Object.prototype.hasOwnProperty.call(selectors, key)) {
-          result[key] = (selectors[key] as any)(state);
+        for (const key in selectors) {
+          if (Object.prototype.hasOwnProperty.call(selectors, key)) {
+            result[key] = (selectors[key] as any)(state);
+          }
         }
-      }
 
-      return result as UserPollsSelectors<T>;
-    };
+        return result as UserPollsSelectors<T>;
+      };
+    }
+
+    return () => null;
   }
+  const [selectorFn] = useState<(state: UserPollsMachineState) => any>(() => getSelectorFn())
 
-  return useSelector(userPollsMachineService, selector) as UserPollsSelectors<T>;
+  return useSelector(machineService, selectorFn) as UserPollsSelectors<T>;
 };

@@ -17,7 +17,7 @@ export const createUserPollsMachine = ({
     id: UserPollsMachineId,
     predictableActionArguments: true,
     preserveActionOrder: true,
-    type: 'parallel',
+    type: "parallel",
     invoke: {
       src: 'onExternalInfoUpdated',
       data: {
@@ -27,6 +27,12 @@ export const createUserPollsMachine = ({
     on: {
       [UserPollsMachineEventsTypes.ExternalInfoUpdated]: {
         actions: 'updateExternalInfo',        
+      },
+      [UserPollsMachineEventsTypes.AddNotification]: {
+        actions: 'addNotification',
+      },
+      [UserPollsMachineEventsTypes.RemoveNotification]: {
+        actions: 'removeNotification',
       },
     },
     states: {

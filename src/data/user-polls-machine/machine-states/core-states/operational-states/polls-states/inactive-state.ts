@@ -5,8 +5,9 @@ import {
 } from '../../../../types';
 
 export const inactiveState: UserPollsMachineStateConfig = {
-  type: 'parallel',
+  type: "parallel",
+
   states: {
     startPoll: startPollState
-  },
+  }
 };

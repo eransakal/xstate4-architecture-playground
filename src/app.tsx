@@ -52,9 +52,7 @@ export const App: React.FC<{
       <UsersProvider>
         <DelayedContent>      
             <UserPollsProvider>
-            <PollsProvider>
               <AppContainer />
-            </PollsProvider>
             </UserPollsProvider>        
         </DelayedContent>
       </UsersProvider>
