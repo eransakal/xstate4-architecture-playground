@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import { useContext, useEffect, useMemo, useRef } from 'react';
 import { UserPollsContext } from './user-polls-context';
 import { UserPollsMachineContext, UserPollsMachineEvents, UserPollsMachineState } from '../types';
 import { useSelector } from '@xstate/react';

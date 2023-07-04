@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { UsersContext } from './users-context';
 import { createUsersMachineLogger } from './logger';
 import { UsersMachineEvents, UsersMachineState } from '../types';

@@ -2,7 +2,6 @@ import axios from 'axios';
 import {
   UserPollsMachineContext,
   UserPollsMachineEvents,
-  UserPollsMachineEventsTypes,
 } from '../types';
 
 export const sendAnswer =

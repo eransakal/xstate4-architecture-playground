@@ -3,7 +3,6 @@ import { createUserPollsMachineLogger } from '../../utils/logger';
 import {
   UserPollsMachineContext,
   UserPollsMachineEvents,
-  UserPollsMachineEventsTypes,
 } from '../../types';
 
 const logger = createUserPollsMachineLogger('setUserAnswer');

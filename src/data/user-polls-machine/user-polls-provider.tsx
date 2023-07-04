@@ -12,8 +12,6 @@ import { removeNotification } from './machine-actions/context/remove-notificatio
 import { onExternalInfoUpdated } from './machine-services/on-external-info-updated';
 import { MachineCalculatedValueEmitter } from './utils/machine-calculated-value-emitter';
 import { isExternalInfoLoaded } from './machine-guards/is-external-info-loaded';
-
-import { createUserPollsMachineLogger } from './utils/logger';
 import { AppContext } from '../../app';
 import { getPollsSnapshot } from './machine-services/get-polls-snapshot';
 import { canManagePolls } from './machine-guards/can-manage-polls';
@@ -27,10 +25,6 @@ import { startPoll } from './machine-services/start-poll';
 import { sendAnswer } from './machine-services/send-answer';
 import { onUserPollstatusUpdated } from './machine-services/on-poll-status-updated';
 import { endPoll } from './machine-services/end-poll';
-
-const logger =  createUserPollsMachineLogger(
-    'userPollsProvider'
-  );
 
 export const UserPollsProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
