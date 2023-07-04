@@ -308,7 +308,7 @@ export const serverMocks = {
       return [200, { status: true }];
     });
 
-    mock.onGet('/polls/create').reply((config) => {
+    mock.onPut('/polls/create').reply((config) => {
       console.log(`[mock] got request 'polls/create'`, config.data);
 
       const userOrFailure = getRequestUserFromHeader(config, true);
